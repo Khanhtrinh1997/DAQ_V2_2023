@@ -1,0 +1,182 @@
+[Stack]
+FillEnabled=0
+OverflowWarningsEnabled=1
+WarningThreshold=90
+SpWarningsEnabled=1
+WarnLogOnly=1
+UseTrigger=1
+TriggerName=main
+LimitSize=0
+ByteLimit=50
+[PlDriver]
+MemConfigValue=C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\CONFIG\debugger\NXP\MK66FN2M0xxx18.ddf
+[Jet]
+DisableInterrupts=0
+LeaveRunning=0
+MultiCoreRunAll=0
+[ArmDriver]
+EnableCache=1
+[JLinkDriver]
+CStepIntDis=_ 0
+LeaveTargetRunning=_ 0
+TraceBufferSize=0x00010000
+TraceStallIfFIFOFull=0x00000000
+TracePortSize=0x00000004
+[DebugChecksum]
+Checksum=673988816
+[Exceptions]
+StopOnUncaught=_ 0
+StopOnThrow=_ 0
+[CodeCoverage]
+Enabled=_ 0
+[CallStack]
+ShowArgs=0
+[Disassembly]
+MixedMode=1
+[SWOTraceHWSettings]
+OverrideDefaultClocks=0
+CpuClock=72000000
+ClockAutoDetect=0
+ClockWanted=2000000
+JtagSpeed=2250000
+Prescaler=32
+TimeStampPrescIndex=0
+TimeStampPrescData=0
+PcSampCYCTAP=1
+PcSampPOSTCNT=15
+PcSampIndex=0
+DataLogMode=0
+ITMportsEnable=0
+ITMportsTermIO=0
+ITMportsLogFile=0
+ITMlogFile=$PROJ_DIR$\ITM.log
+[struct_types]
+Fmt0=Ipv4Context-addr	4	0
+Fmt1=Ipv4Context-defaultGateway	4	0
+Fmt2=Ipv4Context-subnetMask	4	0
+Fmt3=sMODBUSRTU_struct-u8SlaveID	3	0
+Fmt4=sztelog-ZTEDay	3	0
+Fmt5=tConfigParameters-u32FirmwareCRC	4	0
+Fmt6=tConfigParameters-u32GatewayIP	4	0
+Fmt7=tConfigParameters-u32SnmpIP	4	0
+Fmt8=tConfigParameters-u32StaticIP	4	0
+Fmt9=tConfigParameters-u32SubnetMask	4	0
+Fmt10=tConfigParameters2-u32FirmwareCRC	4	0
+Fmt11=tConfigParameters2-u32FirmwareCRC_old	4	0
+Fmt12=tFirmwarePackage-u16FlashAddress	4	0
+Fmt13=tFirmwarePackage-u32ReadingAddr	4	0
+Fmt14=tHistoryInfo-ucSequenceNum	3	0
+Fmt15=tINFODcInfo-fBatt1Curr	4	0
+Fmt16=tLiBManager-u8LiBNumOfReg	3	0
+[array_types]
+Fmt0=uint32_t[26]	4	0
+Fmt1=uint8_t[10]	3	0
+Fmt2=unsigned char[300]	4	0
+[watch_formats]
+Fmt0={W}42:Modbus.u8ByteCount	3	0
+Fmt1={W}42:checksum16	4	0
+Fmt2={W}42:g_checksum	4	0
+Fmt3={W}42:g_sParameters.u32FirmwareCRC	4	0
+Fmt4={W}42:g_sParameters.u8DevNum[2]	3	0
+Fmt5={W}42:g_testchecksum	4	0
+Fmt6={W}42:netInterface[0].ipv4Context.addr	4	0
+Fmt7={W}42:privateMibBase.configGroup.cfgDCLowVolt	3	0
+Fmt8={W}42:privateMibBase.configGroup.cfgLLVDEn	4	0
+Fmt9={W}42:privateMibBase.siteGroup.siteFirmwareCRC	4	0
+Fmt10={W}42:readfromSDRAM	4	0
+Fmt11={W}42:setCmd_mask	4	0
+Fmt12={W}42:settingCommand	4	0
+Fmt13={W}42:settingCommandmask	4	0
+Fmt14={W}42:thao	3	0
+Fmt15={W}42:thao1	3	0
+Fmt16={W}42:u32TestReadAddr	4	0
+[Trace1]
+Enabled=0
+ShowSource=1
+[Trace2]
+Enabled=0
+ShowSource=0
+[SWOTraceWindow]
+PcSampling=0
+InterruptLogs=0
+ForcedTimeStamps=0
+EventCPI=0
+EventEXC=0
+EventFOLD=0
+EventLSU=0
+EventSLEEP=0
+[PowerLog]
+Title_0=I0
+Symbol_0=0 4 0
+LogEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+LiveEnabled=0
+LiveFile=PowerLogLive.log
+[DataLog]
+LogEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+SumEnabled=0
+ShowTimeSum=1
+[EventLog]
+Title_0=Ch3
+Symbol_0=0 4 1
+Title_1=Ch2
+Symbol_1=0 4 1
+Title_2=Ch1
+Symbol_2=0 4 1
+Title_3=Ch0
+Symbol_3=0 4 1
+LogEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+SumEnabled=0
+ShowTimeSum=1
+SumSortOrder=0
+[InterruptLog]
+LogEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+SumEnabled=0
+ShowTimeSum=1
+SumSortOrder=0
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
+[DriverProfiling]
+Enabled=0
+Mode=1
+Graph=0
+Symbiont=0
+Exclusions=
+[CallStackLog]
+Enabled=0
+[CallStackStripe]
+ShowTiming=1
+[PowerProbe]
+Frequency=10000
+Probe0=I0
+ProbeSetup0=2 1 1 2 0 0
+[Disassemble mode]
+mode=0
+[Breakpoints2]
+Bp0=_ 0 "EMUL_TRACE_FILTER" "setCmd_mask" 0 0 0 0 4294967295 1898667587 0 0
+Bp1=_ 0 "EMUL_TRACE_FILTER" "settingCommandmask" 0 0 0 0 4294967295 1898667587 0 0
+Bp2=_ 0 "EMUL_TRACE_FILTER" "settingCommand" 0 0 0 0 4294967295 1898667587 0 0
+Count=3
+[Aliases]
+A0=_ "C:\nxp\SDK_2.1_FRDM-K66F\boards\frdmk66f\user_apps\DAQV2-K66F\devices\MK66F18\drivers\fsl_clock.c" ""
+A1=_ "C:\nxp\SDK_2.1_FRDM-K66F\boards\frdmk66f\user_apps\DAQV2-K66F\devices\MK66F18\iar\startup_MK66F18.s" ""
+A2=_ "C:\nxp\SDK_2.1_FRDM-K66F\boards\frdmk66f\user_apps\DAQV2-K66F\main.c" "C:\nxp\SDK_2.2_FRDM-K66F\boards\frdmk66f\user_apps\DAQV2-K66F\main.c"
+A3=_ "C:\nxp\SDK_2.1_FRDM-K66F\boards\frdmk66f\user_apps\DAQV2-K66F\rtos\freertos_9.0.0\Source\portable\IAR\ARM_CM4F\fsl_tickless_lptmr.c" ""
+A4=_ "C:\nxp\SDK_2.1_FRDM-K66F\boards\frdmk66f\user_apps\DAQV2-K66F\rtos\freertos_9.0.0\Source\portable\IAR\ARM_CM4F\portasm.s" ""
+A5=_ "C:\nxp\SDK_2.1_FRDM-K66F\boards\frdmk66f\user_apps\DAQV2-K66F\rtos\freertos_9.0.0\Source\queue.c" ""
+A6=_ "C:\nxp\SDK_2.1_FRDM-K66F\boards\frdmk66f\user_apps\DAQV2-K66F\rtos\freertos_9.0.0\Source\tasks.c" ""
+A7=_ "D:\Shared Folder\DAQ-V2 TK2 newest version\Ban da kcs trung tam ok\Ban da kcs trung tam ok\DAQV2-K66F\main.c" ""
+Count=8
+SuppressDialog=0
