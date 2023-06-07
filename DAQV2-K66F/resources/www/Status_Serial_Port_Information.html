@@ -1,0 +1,82 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<link rel="stylesheet" href="./css/status.css" type="text/css"> 
+		<script type="text/javascript" src="./js/util.js"></script>
+		<script type="text/javascript" src="./js/constant.js"></script>
+		<script type="text/javascript" src="./js/tabdes.js"></script>
+		<script type="text/javascript" src="./js/jsdiff.js"></script>
+		<script type="text/javascript" src="./js/status_sp_info.js"></script>
+		<script type="text/javascript">
+			document.write("<title>"+LanguageUI["V_STAT_dhcpWebtitle"]+"</title>") ;
+			// Session Key
+			var vSpBaudrate = 0;
+			var vSpDataSize = 0;
+			var vSpParity = 0;
+			var vSpStopBits = 0;			
+		</script>
+	</head>
+	<body onload="LoadFrame()" class="mainbody">
+		<div style="overflow-x:hidden; overflow-y:auto; WIDTH: 100%; HEIGHT: 460px">
+			<form id="ConfigForm">
+				<!-- INTRODUCTION TEXT -->
+				<table class="width_100p" id="tabTest" border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td class="prompt">
+							<table class="width_100p" border="0" cellpadding="0" cellspacing="0">
+								<tbody>
+									<tr>
+										<td class="title_common" BindText="V_STAT_spTitleIntro"></td>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+						<tr>
+							<td class="height5p"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="tabal_bg width_100p" id="dhcpinfo" align="center" border="0" cellpadding="0" cellspacing="1">
+					<tbody>				
+						<!-- SERIAL PORT BAURATE -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_spBaudRate" ></td>
+							<td class="tabal_right width_30p" id="idsp_BaudRate"></td>
+							<td class="tabal_right width_35p" ><select size="1" name="br"><option value="9600">9600</option></select>bits/S<br></td>
+						</tr>
+						<!-- SERIAL PORT DATASIZE -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_spDataSize"></td>
+							<td class="tabal_right width_30p" id="idsp_DataSize"></td>
+							<td class="tabal_right width_35p" ><select size="1" name="bc"><option value="8">8</option></select>bits/character<br></td>
+						</tr>
+						<!-- SERIAL PORT PARITY -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_spParity"></td>
+							<td class="tabal_right width_30p " id="idsp_Parity"></td>
+							<td class="tabal_right width_35p" ><select name="parity"><option value="1">None</option></select></td>
+						</tr>		
+						<!-- SERIAL PORT STOPBITS -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_spStopBits"></td>
+							<td class="tabal_right width_30p" id="idsp_StopBits"></td>
+							<td class="tabal_right width_35p" ><select size="1" name="stop"><option value="1">1</option></select>bit(s)<br></td>
+						</tr>				
+					</tbody>
+				</table>
+
+				<table>
+					<tr>
+						<td height="5px"></td>
+					</tr>
+				</table>				
+			</form>
+
+		</div>
+
+	</body>
+</html>

@@ -1,0 +1,243 @@
+﻿/*
+ *	Frame Style
+ *	主页框架样式表
+ *	Create By yKF32252	
+ */
+div#main {
+	width: 955px;
+	margin: 0px auto;
+}
+
+/* header */
+div#main div#header {
+	height: 76px;
+}
+div#main div#header div#headerLogoImg {
+	float: left;
+	height: 70px;
+	width: 144px;
+	background: url('../images/banner_logo.gif') no-repeat center;
+	border-bottom-left-radius: 6px;
+	border-top-left-radius: 6px;
+}
+div#main div#header div#headerContent {
+	float: left;
+	height: 70px;
+	width: 811px;
+	background: url('../images/banner_bg.gif') repeat-x center;
+	border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+div#main div#header div#headerContent div#headerInfo {
+	height: 45px;
+}
+div#main div#header div#headerContent div#headerInfo div {
+	float: left;
+	width: 405px;
+	height: 45px;
+	line-height: 45px;
+	font-family: Tahoma;
+}
+div#main div#header div#headerContent div#headerInfo div#headerTitle {
+	color: #fefefe;
+	text-align: left;
+	font-size: 25px;
+	font-weight: bold;
+}
+div#main div#header div#headerContent div#headerInfo div#headerLogout {
+	text-align: right;
+	font-size: 12px;
+}
+div#main div#header div#headerContent div#headerInfo div#headerLogout span {
+	margin-right: 20px;
+	cursor: pointer;
+	color: #fefefe;
+	font-weight: bold;
+}
+div#main div#header div#headerContent div#headerTab {
+	height: 25px;
+	clear: both;
+	line-height: 25px;
+}
+div#main div#header div#headerContent div#headerTab ul {
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+div#main div#header div#headerContent div#headerTab ul li {
+	height: 25px;
+	float: left;
+	cursor: pointer;
+	font-weight: bold;
+	margin: 0px 3px;
+}
+div#main div#header div#headerContent div#headerTab ul li div {
+	float: left;
+}
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnLeft {
+	width: 5px;
+	height: 25px;
+	clear: both;
+}
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnCenter {
+	height: 25px;
+	color: #fefefe;
+}
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnRight {
+	width: 5px;
+	height: 25px;
+}
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnLeft {
+	width: 10px;
+	height: 25px;
+	clear: both;
+	/*background-image: url(../images/menuSide.gif);*/
+	cursor: pointer;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnCenter {
+	height: 25px;
+	color: #ea0029;
+	/*background-image: url(../images/menuBg.gif);*/
+	background-color: #FFFFFF;
+	cursor: pointer;
+	font-weight: bold;
+	background-repeat: repeat-x;
+}
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnRight {
+	width: 10px;
+	height: 25px;
+	/*background-image: url(../images/menuSide.gif);*/
+	cursor: pointer;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: -10px 0px;
+}
+div#main div#header div#headerSpace {
+	height: 6px;
+	clear: both;
+	line-height: 6px;
+	background-color: #c9c9c9;
+	border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+/* end header */
+
+/* center */
+div#main div#center {
+	height: 470px;
+}
+div#main div#center div#nav {
+	width: 220px;
+	height: 495px;
+	float: left;
+	background-color: #F6F6F6;
+}
+div#main div#center div#nav ul {
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+div#main div#center div#nav ul li div {
+	width: 210px;
+	height: 25px;
+	cursor: pointer;
+	line-height: 25px;
+	font-weight: bold;
+	margin-bottom: 1px;
+	padding-left: 10px;
+}
+div#main div#center div#nav.orangement
+{
+	background-color:#FFFFFF;
+}
+div#main div#center div#nav.orangement ul li div
+{
+	color:#F47A04;
+}
+div#main div#center div#nav.others ul li div
+{
+	color:#FFFFFF;
+	/*background-color:#00918d/*#d78430;*/ /*Langnt background of horizon bar menu */ 
+	color: #000000;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #E6E6E6;
+}
+
+div#main div#center div#nav ul li.hover div {
+	color: #FFFFFF;/*#e4ab72;*/
+	font-weight: bold;
+	cursor: pointer;
+	/*background-color: #d78430;/*#00918d;*/
+	cursor: pointer;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #EA0029;
+}
+div#main div#center div#content {
+	float: left;
+	width: 735px;
+	height: 495px;
+	background-color: #ffffff; /* Langnt center content */
+}
+div#main div#center div#content div#topNav {
+	height: 25px;
+	color: #000000;
+	line-height: 25px;
+	padding-left: 10px;
+	border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+	background-color: #ffffff; /* Langnt nave menu */
+}
+div#main div#center div#content div#frameWarpContent {
+	height: 470px;
+}
+/* end center */
+
+/* footer */
+div#main div#footer {
+	clear: both;
+	height: 25px;
+	color: #ffffff;
+	text-align: center;
+	border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+	background-color: #ea0029; /*Langnt footer*/
+}
+div#main table {
+	height: 100%;
+	margin: 0px auto;
+}
+div#main div#footer #footerLogo {
+	height: 25px;
+	width: 40px;
+    background: url(../images/hw_logo.gif) no-repeat center;
+}
+div#main div#footer #footerText {
+	color: #ffffff;
+	font-size: 12px;
+}
+/* end footer */
+
+/* fresh */
+div#main div#fresh {
+	display: none;
+}
+/* end fresh */

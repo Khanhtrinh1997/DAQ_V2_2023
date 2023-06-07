@@ -1,0 +1,6470 @@
+
+VIETTEL-DISTRIBUTED-DAQV2K-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+	NOTIFICATION-TYPE, OBJECT-TYPE, MODULE-IDENTITY, 
+	enterprises, Counter32, Integer32
+		FROM SNMPv2-SMI
+	NOTIFICATION-GROUP
+		FROM SNMPv2-CONF
+	DisplayString
+		FROM SNMPv2-TC;
+
+viettel MODULE-IDENTITY
+	LAST-UPDATED "201012221248Z"
+	ORGANIZATION 
+		"VIETTEL dcSystem MIB Working Group"
+	CONTACT-INFO 
+		"Viettel M1 R&D.
+		      Postal: 		    
+		      Tel: +84
+		      Fax: +84
+		      web:  www.viettel.com.vn"
+	DESCRIPTION 
+		"
+		Viettel Distributed V2 branch "
+
+	REVISION "201703230000Z"
+	DESCRIPTION 
+		"change to fit DAQ-V2K version"	
+
+	REVISION "200506281130Z"
+	DESCRIPTION 
+		"First revision"
+::= { enterprises 45797 }
+
+
+-- Supported by PS02 V1.0 and V1.1.
+-- SNMP v3
+
+viettelPowerPlantDAQV2K  OBJECT IDENTIFIER ::= { viettel 14 }
+
+-- This branch contains OIDs for BTS basic information
+
+siteInfo	         OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 1 }
+
+-- This branch contains OID's for RECTIFIER INFO of the DC Power System
+
+rectifierInfo        OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 2 }
+
+-- This branch contains OID's for AC INFO of the DC Power System
+
+acInfo               OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 3 }
+
+-- This branch contains OIDs for BATTERY INFO of the DC Power System
+
+batteryInfo              OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 4 }
+
+-- This branch contains OIDs related to the DC Load Distribution equipment
+
+loadInfo     OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 5 }
+
+-- This branch contains OIDs related to the Batter Monitor Unit
+
+bmInfo     OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 6 }
+
+-- This branch contains OIDs related to the Lithium battery equipment
+
+liionBattInfo     OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 9 }
+
+-- This branch contains OIDs related to the Generator
+
+genInfo     OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 10 }
+
+-- This branch contains OIDs related to the Power Meter Unit - PM
+
+pmInfo     OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 11 }
+
+-- This branch contains OIDs related to the VAC Unit - VAC
+
+vacInfo     OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 12 }
+
+-- This branch contains OIDs related to configurable battery parameters
+
+configBattTestInfo            OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 13 }
+
+-- This branch contains OIDs related to configurable general parameters
+
+configurationInfo            OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 14 }
+
+-- This branch contains OIDs for alarm status.
+
+alarmWellknownAlarms           OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 15 }
+
+-- This branch contains OIDs for alarm status.
+
+alarmDigitalInputAlarms           OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 16 }
+
+-- This branch contains OIDs for alarm status.
+
+alarmConnectionAlarms           OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 17 }
+
+-- This branch contains OIDs for smcb.
+smcbInfo           OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 18 }
+
+-- This branch contains OIDs for fuel.
+fuelInfo           OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 19 }
+
+-- This branch contains OIDs for isense.
+isenseInfo           OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 21 }
+
+-- this branch contains OIDs for pm dc
+pmdcInfo           OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 22 }
+
+-- Counter
+Cnt               OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 23 }
+---this branch contains OIDs for fan dpc
+fandpcInfo        OBJECT IDENTIFIER ::= { viettelPowerPlantDAQV2K 24 }         
+
+siteInfoBTSCode  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..255))
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"This contains BTS code"
+	::= { siteInfo 1 }
+
+siteInfoDCsystemVendor  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..255))
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"This contains DC system Vendor Information."
+	::= { siteInfo 2 }
+	
+siteInfoControllerModel  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		m500D (0),
+		zxdu58 (1),
+		cpmu01 (2),
+		m221S(3),
+		m830B(5)	
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"This contains Controller Model Information."
+	::= { siteInfo 3 }
+
+siteCRCStr  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..31))
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"A CRC of new firmware."
+	::= { siteInfo 4 }
+	
+siteInfoAmbientTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (0..1440)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"This indicates BTS Ambient Temperature."
+	::= { siteInfo 5 }
+	
+siteInfoTrapCounter  OBJECT-TYPE
+	SYNTAX     Counter32
+	MAX-ACCESS accessible-for-notify
+	STATUS     current
+	DESCRIPTION 
+		"The number of times a trap has been repeated.. Only acessible for Traps."
+	::= { siteInfo 6 }
+
+siteInfoSystemReset  OBJECT-TYPE
+	SYNTAX     Integer32 (0..1440)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"This used to reset the DAQ."
+	::= { siteInfo 7 }
+
+siteInfoMACInfo  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..31))
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"MAC information of Device."
+	::= { siteInfo 8 }
+	
+siteInfoSerialNumber  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..31))
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"Serial Number of Device."
+	::= { siteInfo 9 }
+	
+siteSNMPServer  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..31))
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"SNMP Server IP."
+	::= { siteInfo 10 }	
+	
+siteFTPServer  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..31))
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"FTP Server IP."
+	::= { siteInfo 11 }
+
+siteFirmwareUpdate  OBJECT-TYPE
+	SYNTAX     Integer32 (0..1440)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"This used to update firmware."
+	::= { siteInfo 12 }	
+
+siteFWType  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		DAQ-V2 (0),
+		VAC_V1 (1),
+		VAC_V2 (2),
+		NO_FW_UPDATE (255)
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"This defined device to update."
+	::= { siteInfo 13 }	
+
+siteDeviceModel  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..255))
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"This contains device model"
+	::= { siteInfo 14 }	
+	
+siteTrapEnable  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		Off-Trap (0),
+		One-Shot (1),
+		Continuous (2)
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { siteInfo 15 }	
+-- the RectInfo table
+
+-- The RectInfo table contains information on the recifiers
+-- information.
+	
+rectifierInstalledRectifiers  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of installed rectifiers for this DC Power System."
+	::= { rectifierInfo 1 }
+
+rectifierRectifiersActive  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"Number of active rect!"
+	::= { rectifierInfo 2 }
+
+rectifierTotalCurrent  OBJECT-TYPE
+	SYNTAX     Integer32
+	UNITS 	"DeciAmperes; i.e. 20 = 2,0 Amperes"
+	MAX-ACCESS accessible-for-notify
+	STATUS     current
+	DESCRIPTION 
+		"The DC system's total delivered rectifier current"
+	::= { rectifierInfo 3 }
+
+rectifierUtilization  OBJECT-TYPE
+	SYNTAX     Integer32 (0..100)
+	UNITS 	"%"
+	MAX-ACCESS accessible-for-notify
+	STATUS     current
+	DESCRIPTION 
+		"Utilization in % of available rectifier capacity"
+	REFERENCE 
+		"Rect.Capacity"
+	::= { rectifierInfo 4 }
+
+rectifierStatusTable  OBJECT-TYPE
+	SYNTAX SEQUENCE OF RectifierStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A table listing up to 20 recifiers"
+	::= { rectifierInfo 5 }
+
+rectifierStatusEntry  OBJECT-TYPE
+	SYNTAX 	RectifierStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A row of rectifier status data corresponding to the rectifierStatusNoIndex value"
+	INDEX { rectifierStatusID }
+	::= { rectifierStatusTable 1 }
+
+RectifierStatusEntry ::= SEQUENCE {
+	rectifierStatusID
+		Integer32,
+	rectifierStatusStatus
+		INTEGER,
+	rectifierStatusOutputCurrent
+		Integer32,
+	rectifierStatusOutputVoltage
+		Integer32,
+	rectifierStatusTemp
+		Integer32,
+	rectifierStatusType
+		DisplayString,
+	rectifierStatusACFault
+		Integer32,
+	rectifierStatusSerialNo
+		DisplayString,
+	rectifierStatusRevisionLevel
+		DisplayString
+}
+
+rectifierStatusID  OBJECT-TYPE
+	SYNTAX     Integer32 (1..100)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The rectifier ID number of the rectifier."
+	::= { rectifierStatusEntry 1 }
+
+rectifierStatusStatus  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		inActive (0),
+		noResponse (170),
+		dcOff (10),
+		fail (165),
+		normal (255)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The operational status of the rectifier record.
+		normal (0),
+		no response (226)
+		      
+		      "
+	::= { rectifierStatusEntry 2 }
+
+rectifierStatusOutputCurrent  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"DeciAmperes"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The output current of the rectifier."
+	::= { rectifierStatusEntry 3 }
+
+rectifierStatusOutputVoltage  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"1/100 Volt; i.e. 5400 = 54.00V"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The rectifier voltage of the rectifier record."
+	::= { rectifierStatusEntry 4 }
+
+rectifierStatusTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Deg. C/F; i.e. 35 = 35 Degrees"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The input air temperature of the rectifier."
+	::= { rectifierStatusEntry 5 }
+
+rectifierStatusType  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..32))
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The rectifier article number string of the rectifier record."
+	::= { rectifierStatusEntry 6 }
+
+rectifierStatusACFault  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The AC Fault status of the rectifier record.
+		normal (0),
+		alarm (1)		      
+		      "
+	::= { rectifierStatusEntry 7 }
+
+rectifierStatusSerialNo  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..16))
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"The rectifier serial number string of the rectifier record."
+	::= { rectifierStatusEntry 8 }
+
+rectifierStatusRevisionLevel  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..16))
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"The rectifier HW revision number string of the rectifier record."
+	::= { rectifierStatusEntry 9 }
+
+-- the ACInfo table
+
+-- The ACInfo table contains information on the phase's
+-- ac information.  
+
+acPhaseNumber  OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+            "The number of network interfaces (regardless of their
+            current state) present on this system."
+    ::= { acInfo 1 }
+
+acPhaseTable OBJECT-TYPE
+    SYNTAX      SEQUENCE OF AcPhaseEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+            "A list of acInfo phases.  The number of phase is
+            given by the value of acPhaseNumber."
+    ::= { acInfo 2 }
+
+acPhaseEntry OBJECT-TYPE
+    SYNTAX      AcPhaseEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+            "An entry containing management information applicable to a
+            particular interface."
+    INDEX   { acPhaseIndex }
+    ::= { acPhaseTable 1 }
+
+AcPhaseEntry ::=
+    SEQUENCE {
+        acPhaseIndex            Integer32,   
+        acPhaseVolt                   Integer32   
+    }
+
+acPhaseIndex OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+            ""
+    ::= { acPhaseEntry 1 }
+
+acPhaseVolt OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+            ""
+    ::= { acPhaseEntry 2 }
+
+
+batteryVoltage  OBJECT-TYPE
+	SYNTAX     Integer32 (0..7500)
+	UNITS 	"1/100 Volt; i.e. 5400 = 54.00V"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The measured battery voltage."
+	::= { batteryInfo 1 }
+
+batteryCurrent  OBJECT-TYPE
+	SYNTAX     Integer32
+	UNITS 	"Amperes or DeciAmperes"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The measured total battery current.
+		This is the sum of all the enabled shunt measurements in the system.
+		Negative battery current indicates discharging of the batteries.
+		Positive battery current indicates charging of the batteries.
+		Note that the units measured may be i Amperes or in Deciamperes depending on global system settings"
+	::= { batteryInfo 2 }
+
+batteryTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (0..9999)
+	UNITS 	"Deg. C/F; i.e. 25 = 25 Deg."
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The highest value of the enabled battery temperature measurements.
+		Depending on the global setting in the Control unit, this value will be presented in Celsius
+		or Fahrenheit."
+	::= { batteryInfo 3 }
+		
+batteryBanksNumofBanks  OBJECT-TYPE
+	SYNTAX     Integer32 (1..8)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of Control units that is used to measure battery parameters. "
+	::= { batteryInfo 4 }
+
+batteryCapacityLeft1  OBJECT-TYPE
+	SYNTAX     Integer32
+	UNITS 	"Ah/%;  23 = 23 Ah or in %"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"Capacity left in the battery."
+	REFERENCE 
+		"BatteryRemCap"
+	::= { batteryInfo 5 }
+
+batteryCapacityLeft2  OBJECT-TYPE
+	SYNTAX     Integer32
+	UNITS 	"Ah/%;  23 = 23 Ah or in %"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"Capacity consumed."
+	REFERENCE 
+		"BatteryUsedCap"
+	::= { batteryInfo 6 }
+
+batteryBreaker1Status  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The state of the battery fuses/breakers can be either normal(0) or alarm(1)."
+	::= { batteryInfo 7 }
+
+batteryBreaker2Status  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The state of the battery fuses/breakers can be either normal(0) or alarm(1)."
+	::= { batteryInfo 8 }
+	
+batteryBreaker3Status  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The state of the battery fuses/breakers can be either normal(0) or alarm(1)."
+	::= { batteryInfo 9 }
+	
+batteryBreaker4Status  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The state of the battery fuses/breakers can be either normal(0) or alarm(1)."
+	::= { batteryInfo 10 }
+
+batteryCapacityLeft3  OBJECT-TYPE
+	SYNTAX     Integer32
+	UNITS 	"Ah/%;  23 = 23 Ah or in %"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"Capacity left in the battery."
+	REFERENCE 
+		"BatteryRemCap"
+	::= { batteryInfo 11 }
+
+batteryCapacityLeft4  OBJECT-TYPE
+	SYNTAX     Integer32
+	UNITS 	"Ah/%;  23 = 23 Ah or in %"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"Capacity left in the battery."
+	REFERENCE 
+		"BatteryRemCap"
+	::= { batteryInfo 12 }
+--
+loadDistributionCurrent  OBJECT-TYPE
+	SYNTAX     Integer32
+	UNITS 	"Amperes or DeciAmperes"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The total load current
+		Note that the units measured may be i Amperes or in Deciamperes depending on global system settings"
+	::= { loadInfo 1 }
+
+loadDistributionBreaker1Status  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The state of the load fuses/breakers can be either normal(0) or alarm(1) "
+	::= { loadInfo 2 }
+	
+loadDistributionBreaker2Status  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The state of the load fuses/breakers can be either normal(0) or alarm(1) "
+	::= { loadInfo 3 }
+	
+loadDistributionBreaker3Status  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The state of the load fuses/breakers can be either normal(0) or alarm(1) "
+	::= { loadInfo 4 }
+	
+loadDistributionBreaker4Status  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The state of the load fuses/breakers can be either normal(0) or alarm(1) "
+	::= { loadInfo 5 }
+	
+loadDistributionBreaker5Status  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The state of the load fuses/breakers can be either normal(0) or alarm(1) "
+	::= { loadInfo 6 }
+	
+loadDistributionBreaker6Status  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The state of the load fuses/breakers can be either normal(0) or alarm(1) "
+	::= { loadInfo 7 }
+	
+loadDistributionBreaker7Status  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The state of the load fuses/breakers can be either normal(0) or alarm(1) "
+	::= { loadInfo 8 }
+	
+loadDistributionBreaker8Status  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The state of the load fuses/breakers can be either normal(0) or alarm(1) "
+	::= { loadInfo 9 }
+	
+loadDistributionBreaker9Status  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The state of the load fuses/breakers can be either normal(0) or alarm(1) "
+	::= { loadInfo 10 }
+	
+loadDistributionBreaker10Status  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The state of the load fuses/breakers can be either normal(0) or alarm(1) "
+	::= { loadInfo 11 }
+
+
+-- the BmInfo table
+
+-- The BmInfo table contains information on the lead-acid battery monitor units
+-- information.
+	
+bmInstalledBM  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of installed Batt Monitor."
+	::= { bmInfo 1 }
+
+bmActiveBM  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of active Batt Monitor."
+	::= { bmInfo 2 }
+
+bmStatusTable  OBJECT-TYPE
+	SYNTAX SEQUENCE OF BmStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A table listing up to 2 Batt Monitor"
+	::= { bmInfo 3 }
+
+bmStatusEntry  OBJECT-TYPE
+	SYNTAX 	BmStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A row of bm status data corresponding to the bmStatusNoIndex value"
+	INDEX { bmID }
+	::= { bmStatusTable 1 }
+
+BmStatusEntry ::= SEQUENCE {
+	bmID
+		Integer32,	
+	bmStatus
+		Integer32,	
+	bmBattVolt
+		Integer32,	
+	bmPackVolt
+		Integer32,
+	bmPackCurr
+		Integer32,	
+	bmCellVolt1
+		Integer32,	
+	bmCellVolt2
+		Integer32,	
+	bmCellVolt3
+		Integer32,	
+	bmCellVolt4
+		Integer32,	
+	bmCellTemp1
+		Integer32,	
+	bmCellTemp2
+		Integer32,	
+	bmCellTemp3
+		Integer32,	
+	bmCellTemp4
+		Integer32,	
+	bmCellTemp5
+		Integer32,	
+	bmCellTemp6
+		Integer32,
+	bmAlarmStatus
+		Counter32,	
+	bmBalanceStatus
+		Integer32,	
+	bmBattStatus
+		Integer32,
+	bmSOC
+		Integer32,	
+	bmSOH
+		Integer32,	
+	bmDischargeTime
+		Integer32,
+	bmTotalRunTime
+		Integer32,	
+	bmVoltDiff
+		Integer32,
+	bmMaxTemp
+		Integer32,	
+	bmVoltThres
+		Integer32,	
+	bmCurrThres
+		Integer32,
+	bmTimeThres
+		Integer32,
+	bmSOCThres
+		Integer32,
+	bmMinTemp
+		Integer32,
+	bmLowCapTime
+		Integer32,
+	bmTotalDisAH
+		Integer32,
+	bmHalfVoltAlarm
+		Integer32,
+	bmRechargeVolt
+		Integer32,
+	bmCurrBalanceThres
+		Integer32
+}
+
+bmID  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 1 }
+
+bmStatus  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 2 }
+
+bmBattVolt  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 3 }
+
+bmPackVolt  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 4 }
+
+bmPackCurr  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 5 }
+
+bmCellVolt1  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 6 }
+
+bmCellVolt2  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 7 }
+
+bmCellVolt3  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 8 }
+
+bmCellVolt4  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 9 }
+
+bmCellTemp1  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 10 }
+
+bmCellTemp2  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 11 }
+
+bmCellTemp3  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 12 }
+
+bmCellTemp4  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 13 }
+
+bmCellTemp5  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 14 }
+
+bmCellTemp6  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 15 }
+
+bmAlarmStatus  OBJECT-TYPE
+	SYNTAX     Counter32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 16 }
+
+bmBalanceStatus  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 17 }
+
+bmBattStatus  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 18 }
+
+bmSOC  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 19 }
+
+bmSOH  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 20 }
+
+bmDischargeTime  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 21 }
+
+bmTotalRunTime  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 22 }
+
+bmVoltDiff  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 23 }
+
+bmMaxTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 24 }
+
+bmVoltThres  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 25 }
+
+bmCurrThres  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 26 }
+
+bmTimeThres  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 27 }
+
+bmSOCThres  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 28 }
+
+bmMinTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 29 }
+
+bmLowCapTime  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 30 }
+
+bmTotalDisAH  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 31 }
+
+bmHalfVoltAlarm  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 32 }
+
+bmRechargeVolt  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 33 }
+
+bmCurrBalanceThres  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { bmStatusEntry 34 }
+	
+-- the LiionBattInfo table
+
+-- The LiionBattInfo table contains information on the Lithium Battery
+-- information.
+	
+liionBattInstalledPack  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The number of installed Liion Battery Pack."
+	::= { liionBattInfo 1 }
+
+liionBattActivePack  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of active Liion Battery Pack."
+	::= { liionBattInfo 2 }
+
+liionBattTotalCurrent  OBJECT-TYPE
+	SYNTAX     Integer32
+	UNITS 	"DeciAmperes; i.e. 20 = 2,0 Amperes"
+	MAX-ACCESS accessible-for-notify
+	STATUS     current
+	DESCRIPTION 
+		"The DC system's total delivered rectifier current"
+	::= { liionBattInfo 3 }
+
+liionBattUtilization  OBJECT-TYPE
+	SYNTAX     Integer32 (0..100)
+	UNITS 	"%"
+	MAX-ACCESS accessible-for-notify
+	STATUS     current
+	DESCRIPTION 
+		"Utilization in % of available Liion Battery capacity"
+	REFERENCE 
+		"Rect.Capacity"
+	::= { liionBattInfo 4 }
+
+liionBattStatusTable  OBJECT-TYPE
+	SYNTAX SEQUENCE OF LiionBattStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A table listing up to 10 lithium battery packs"
+	::= { liionBattInfo 5 }
+
+liionBattStatusEntry  OBJECT-TYPE
+	SYNTAX 	LiionBattStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A row of lithium battery status data corresponding to the liionBattInstalledPack value"
+	INDEX { liionBattStatusID }
+	::= { liionBattStatusTable 1 }
+
+LiionBattStatusEntry ::= SEQUENCE {
+	liionBattStatusID
+		Integer32,
+	liionBattStatusStatus
+		INTEGER,
+	liionBattStatusPackVolt
+		Integer32,
+	liionBattStatusPackCurr
+		Integer32,
+	liionBattStatusRemainCap
+		Integer32,
+	liionBattStatusBMSTemp
+		Integer32,
+	liionBattStatusAmbTemp
+		Integer32,
+	liionBattStatusWarningFlag
+		Integer32,
+	liionBattStatusProtectFlag
+		Integer32,
+	liionBattStatusFaultStat
+		Integer32,
+	liionBattStatusSOC
+		Integer32,
+	liionBattStatusSOH
+		Integer32,
+	liionBattStatusDisChargeTimes
+		Integer32,
+	liionBattStatusHWVer
+		DisplayString,
+	liionBattStatusSerialNo
+		DisplayString,
+	liionBattStatusCellVolt1
+		Integer32,
+	liionBattStatusCellVolt2
+		Integer32,
+	liionBattStatusCellVolt3
+		Integer32,
+	liionBattStatusCellVolt4
+		Integer32,
+	liionBattStatusCellVolt5
+		Integer32,
+	liionBattStatusCellVolt6
+		Integer32,
+	liionBattStatusCellVolt7
+		Integer32,
+	liionBattStatusCellVolt8
+		Integer32,
+	liionBattStatusCellVolt9
+		Integer32,
+	liionBattStatusCellVolt10
+		Integer32,
+	liionBattStatusCellVolt11
+		Integer32,
+	liionBattStatusCellVolt12
+		Integer32,
+	liionBattStatusCellVolt13
+		Integer32,
+	liionBattStatusCellVolt14
+		Integer32,
+	liionBattStatusCellVolt15
+		Integer32,
+	liionBattStatusCellVolt16
+		Integer32,
+	liionBattStatusCellTemp1
+		Integer32,
+	liionBattStatusCellTemp2
+		Integer32,
+	liionBattStatusCellTemp3
+		Integer32,
+	liionBattStatusCellTemp4
+		Integer32,
+	liionBattStatusCellTemp5
+		Integer32,
+	liionBattStatusCellTemp6
+		Integer32,
+	liionBattStatusCellTemp7
+		Integer32,
+	liionBattStatusCellTemp8
+		Integer32,
+	liionBattStatusCellTemp9
+		Integer32,
+	liionBattStatusCellTemp10
+		Integer32,
+	liionBattStatusCellTemp11
+		Integer32,
+	liionBattStatusCellTemp12
+		Integer32,
+	liionBattStatusCellTemp13
+		Integer32,
+	liionBattStatusCellTemp14
+		Integer32,
+	liionBattStatusCellTemp15
+		Integer32,
+	liionBattStatusCellTemp16
+		Integer32,
+	liionBattStatusModbusID
+		Integer32,
+	liionBattStatusAlarmStatus
+		Counter32,		
+	liionBattStatusType
+		INTEGER,
+	liionBattStatusCCL
+		Integer32,
+	liionBattStatusModel
+		DisplayString,
+	liionBattMode
+		INTEGER,
+	liionBattStatusSWVer
+		DisplayString,
+	liionConverterState
+		Integer32,
+	liionErrCode
+		Integer32,
+	liionBalanceStatus
+		Integer32,
+	liionMosfetMode
+		Integer32,
+	liionMcu2McuErr
+		Integer32,
+	liionCHGCapacity
+		Integer32,
+	liionDSGCapacity
+		Integer32,
+	liionEfficiency
+		Integer32,
+	liionNumberOfCan
+		Integer32,
+	liionPackHighVolt-A 
+		Integer32,
+	liionBattHighVolt-A
+		Integer32,
+	liionCellHighVolt-A
+		Integer32,
+	liionBattLowVolt-A
+		Integer32,
+	liionCellLowVolt-A
+		Integer32,
+	liionCharHighCurr-A
+		Integer32,
+	liionDisCharHighCurr-A
+		Integer32,
+	liionCharHighTemp-A
+		Integer32,
+	liionDisCharHighTemp-A
+		Integer32,
+	liionCharLowTemp-A
+		Integer32,
+	liionDisCharLowtemp-A
+		Integer32,
+	liionLowCap-A
+		Integer32,
+	liionBMSHighTemp-A 
+		Integer32,
+	liionBMSLowTemp-A 
+		Integer32,
+	liionPackOverVolt-P 
+		Integer32,
+	liionBattOverVolt-P
+		Integer32,
+	liionCellOverVolt-P
+		Integer32,
+	liionBattUnderVolt-P
+		Integer32,
+	liionCellUnderVolt-P
+		Integer32,
+	liionCharOverCurr-P
+		Integer32,
+	liionDisCharOverCurr-P
+		Integer32,
+	liionCharOverTemp-P
+		Integer32,
+	liionDisCharOverTemp-P
+		Integer32,
+	liionCharUnderTemp-P
+		Integer32,
+	liionDisCharUnderTemp-P
+		Integer32,
+	liionUnderCap-P
+		Integer32,	
+	liionBMSOverTemp-P 
+		Integer32,
+	liionBMSUnderTemp-P 
+		Integer32,
+	liionDifferentVolt-P
+		Integer32,
+	liionVoltBalance
+		Integer32,
+	liionDeltaVoltBalance
+		Integer32,
+	liionDisCharCurrLimit
+		Integer32,
+	liionCharCurrLimit
+		Integer32,
+	liionVoltDisCharRef
+		Integer32,
+	liionVoltDisCharCMD
+		Integer32,
+	liionSystemByte
+		Integer32,
+	liionKeyTime
+		Integer32,
+	liionIniMaxim
+		Integer32,
+	liionEnableKCS
+		Integer32,
+	liionADCPackVolt
+		Integer32,
+	liionADCBattVolt
+		Integer32,
+	liionADCPackCurr
+		Integer32,
+	liionADCBattCurr
+		Integer32,
+	liionSOC1
+		Integer32,
+	liionSOH1
+		Integer32,
+	liionFullCapRep2
+		Integer32,
+	liionVolt2
+		Integer32,
+	liionCurr2
+		Integer32,
+	liionCurr3
+		Integer32,
+	liionSOC3
+		Integer32,
+	liionVpri3
+		Integer32,
+	liionVmes3
+		Integer32,
+	liionCap3
+		Integer32,
+	liionInternalR03
+		Integer32,
+	liionEnableLock
+		Integer32,
+    liionCapInit
+		Integer32
+}
+
+liionBattStatusID  OBJECT-TYPE
+	SYNTAX     Integer32 (1..100)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The rectifier ID number of the rectifier."
+	::= { liionBattStatusEntry 1 }
+
+liionBattStatusStatus  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		inActive (0),
+		noResponse (170),
+		fail (165),
+		normal (255)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The operational status of the rectifier record.
+		normal (0),
+		no response (226)
+		      
+		      "
+	::= { liionBattStatusEntry 2 }
+
+liionBattStatusPackVolt  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Volt"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The voltage of Lithium battery pack."
+	::= { liionBattStatusEntry 3 }
+
+liionBattStatusPackCurr  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Ampre"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The current of Lithium battery pack."
+	::= { liionBattStatusEntry 4 }
+
+liionBattStatusRemainCap  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"%"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The remaining Capacity of Lithium battery pack."
+	::= { liionBattStatusEntry 5 }
+
+liionBattStatusBMSTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Deg. C/F; i.e. 35 = 35 Degrees"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The average temperature of the cell."
+	::= { liionBattStatusEntry 6 }
+
+liionBattStatusAmbTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Deg. C/F; i.e. 35 = 35 Degrees"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temperature of enviroment."
+	::= { liionBattStatusEntry 7 }
+
+liionBattStatusWarningFlag  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	""
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The SOC of Battery Pack."
+	::= { liionBattStatusEntry 8 }
+
+liionBattStatusProtectFlag  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	""
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temperature of enviroment."
+	::= { liionBattStatusEntry 9 }
+
+liionBattStatusFaultStat  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	""
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temperature of enviroment."
+	::= { liionBattStatusEntry 10 }	
+
+liionBattStatusSOC  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Deg. C/F; i.e. 35 = 35 Degrees"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temperature of enviroment."
+	::= { liionBattStatusEntry 11 }
+
+liionBattStatusSOH  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	""
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The SOH."
+	::= { liionBattStatusEntry 12 }
+
+liionBattStatusDisChargeTimes  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	""
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of DischargeTimes."
+	::= { liionBattStatusEntry 13 }
+	
+liionBattStatusHWVer  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..16))
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Lithium Pack HW version."
+	::= { liionBattStatusEntry 14 }
+
+liionBattStatusSerialNo  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..30))
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The serial number of Lithium Pack."
+	::= { liionBattStatusEntry 15 }
+
+liionBattStatusCellVolt1  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mV; i.e. 3333 = 3333 mV"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The volt cell 1."
+	::= { liionBattStatusEntry 16}
+
+liionBattStatusCellVolt2  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mV; i.e. 3333 = 3333 mV"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The volt cell 1."
+	::= { liionBattStatusEntry 17}
+
+liionBattStatusCellVolt3  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mV; i.e. 3333 = 3333 mV"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The volt cell 1."
+	::= { liionBattStatusEntry 18}
+
+liionBattStatusCellVolt4  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mV; i.e. 3333 = 3333 mV"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The volt cell 1."
+	::= { liionBattStatusEntry 19}
+
+liionBattStatusCellVolt5  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mV; i.e. 3333 = 3333 mV"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The volt cell 1."
+	::= { liionBattStatusEntry 20}
+
+liionBattStatusCellVolt6  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mV; i.e. 3333 = 3333 mV"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The volt cell 1."
+	::= { liionBattStatusEntry 21}
+
+liionBattStatusCellVolt7  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mV; i.e. 3333 = 3333 mV"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The volt cell 1."
+	::= { liionBattStatusEntry 22}
+
+liionBattStatusCellVolt8  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mV; i.e. 3333 = 3333 mV"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The volt cell 1."
+	::= { liionBattStatusEntry 23}
+
+liionBattStatusCellVolt9  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mV; i.e. 3333 = 3333 mV"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The volt cell 1."
+	::= { liionBattStatusEntry 24}
+
+liionBattStatusCellVolt10  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mV; i.e. 3333 = 3333 mV"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The volt cell 1."
+	::= { liionBattStatusEntry 25}
+
+liionBattStatusCellVolt11  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mV; i.e. 3333 = 3333 mV"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The volt cell 1."
+	::= { liionBattStatusEntry 26}
+
+liionBattStatusCellVolt12  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mV; i.e. 3333 = 3333 mV"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The volt cell 1."
+	::= { liionBattStatusEntry 27}
+
+liionBattStatusCellVolt13  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mV; i.e. 3333 = 3333 mV"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The volt cell 1."
+	::= { liionBattStatusEntry 28}
+
+liionBattStatusCellVolt14  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mV; i.e. 3333 = 3333 mV"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The volt cell 1."
+	::= { liionBattStatusEntry 29}
+
+liionBattStatusCellVolt15  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mV; i.e. 3333 = 3333 mV"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The volt cell 1."
+	::= { liionBattStatusEntry 30}
+
+liionBattStatusCellVolt16  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mV; i.e. 3333 = 3333 mV"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The volt cell 1."
+	::= { liionBattStatusEntry 31}
+
+liionBattStatusCellTemp1  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Degree; i.e. 3333 = 3333 Degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temp cell."
+	::= { liionBattStatusEntry 32}
+
+liionBattStatusCellTemp2  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Degree; i.e. 3333 = 3333 Degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temp cell."
+	::= { liionBattStatusEntry 33}
+
+liionBattStatusCellTemp3  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Degree; i.e. 3333 = 3333 Degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temp cell."
+	::= { liionBattStatusEntry 34}
+
+liionBattStatusCellTemp4  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Degree; i.e. 3333 = 3333 Degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temp cell."
+	::= { liionBattStatusEntry 35}
+
+liionBattStatusCellTemp5  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Degree; i.e. 3333 = 3333 Degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temp cell."
+	::= { liionBattStatusEntry 36}
+
+liionBattStatusCellTemp6  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Degree; i.e. 3333 = 3333 Degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temp cell."
+	::= { liionBattStatusEntry 37}
+
+liionBattStatusCellTemp7  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Degree; i.e. 3333 = 3333 Degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temp cell."
+	::= { liionBattStatusEntry 38}
+
+liionBattStatusCellTemp8  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Degree; i.e. 3333 = 3333 Degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temp cell."
+	::= { liionBattStatusEntry 39}
+
+liionBattStatusCellTemp9  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Degree; i.e. 3333 = 3333 Degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temp cell."
+	::= { liionBattStatusEntry 40}
+
+liionBattStatusCellTemp10  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Degree; i.e. 3333 = 3333 Degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temp cell."
+	::= { liionBattStatusEntry 41}
+
+liionBattStatusCellTemp11  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Degree; i.e. 3333 = 3333 Degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temp cell."
+	::= { liionBattStatusEntry 42}
+
+liionBattStatusCellTemp12  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Degree; i.e. 3333 = 3333 Degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temp cell."
+	::= { liionBattStatusEntry 43}
+
+liionBattStatusCellTemp13  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Degree; i.e. 3333 = 3333 Degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temp cell."
+	::= { liionBattStatusEntry 44}
+
+liionBattStatusCellTemp14  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Degree; i.e. 3333 = 3333 Degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temp cell."
+	::= { liionBattStatusEntry 45}
+
+liionBattStatusCellTemp15  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Degree; i.e. 3333 = 3333 Degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temp cell."
+	::= { liionBattStatusEntry 46}
+
+liionBattStatusCellTemp16  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Degree; i.e. 3333 = 3333 Degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The temp cell."
+	::= { liionBattStatusEntry 47}
+
+liionBattStatusModbusID  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	""
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 48}
+
+liionBattStatusAlarmStatus  OBJECT-TYPE
+	SYNTAX     Counter32
+	UNITS 	""
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Alarm Status"
+	::= { liionBattStatusEntry 49}	
+
+liionBattStatusType  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		INVALID (0),
+		COSLIGHT (1),
+		COSLIGHT_OLD_V1.1 (2),
+		SHOTO (3),
+		HUAWEI (4),
+		VIETTEL (5),
+		ZTT_2020 (6),
+		ZTT (7),
+		HUAWEI_A1 (8),
+		SAFT (9),
+		NARADA75 (10),
+		EVE(11),
+		SHOTO_SDA10_48100(12),
+		COSLIGHT_CF4850T(13),
+		HUAFU_HF48100C(14),
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Lib Type."
+	::= { liionBattStatusEntry 50 }
+
+liionBattStatusCCL  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	""
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The SN."
+	::= { liionBattStatusEntry 51 }
+
+liionBattStatusModel  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..20))
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The model of Lithium Pack."
+	::= { liionBattStatusEntry 52 }
+
+liionBattMode  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		Charge (1),
+		Discharge (2),
+		Stop (3)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Lib Mode."
+	::= { liionBattStatusEntry 53 }
+	
+liionBattStatusSWVer  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..16))
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Lithium Pack SW version."
+	::= { liionBattStatusEntry 54 }
+	
+liionConverterState  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 55 }
+	
+liionErrCode  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 56 }
+	
+liionBalanceStatus  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 57 }
+	
+liionMosfetMode  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 58 }
+	
+liionMcu2McuErr  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 59 }
+	
+liionCHGCapacity  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 60 }
+	
+liionDSGCapacity  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 61 }
+	
+liionEfficiency  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 62 }
+	
+liionNumberOfCan  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 63 }	
+	
+liionPackHighVolt-A  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 64 }
+	
+liionBattHighVolt-A  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 65 }
+	
+liionCellHighVolt-A  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 66 }
+	
+liionBattLowVolt-A  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 67 }
+	
+liionCellLowVolt-A  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 68 }
+	
+liionCharHighCurr-A  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 69 }
+	
+liionDisCharHighCurr-A  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 70 }
+	
+liionCharHighTemp-A  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 71 }
+	
+liionDisCharHighTemp-A  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 72 }
+	
+liionCharLowTemp-A  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 73 }
+	
+liionDisCharLowtemp-A  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 74 }
+	
+liionLowCap-A  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 75 }
+	
+liionBMSHighTemp-A  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 76 }
+	
+liionBMSLowTemp-A  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 77 }
+	
+liionPackOverVolt-P  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 78 }
+	
+liionBattOverVolt-P  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 79 }
+	
+liionCellOverVolt-P  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 80 }
+	
+liionBattUnderVolt-P  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 81 }
+	
+liionCellUnderVolt-P  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 82 }
+	
+liionCharOverCurr-P  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 83 }
+	
+liionDisCharOverCurr-P  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 84 }
+	
+liionCharOverTemp-P  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 85 }
+	
+liionDisCharOverTemp-P  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 86 }
+	
+liionCharUnderTemp-P  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 87 }
+	
+liionDisCharUnderTemp-P  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 88 }
+	
+liionUnderCap-P  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 89 }
+	
+liionBMSOverTemp-P  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 90 }
+	
+liionBMSUnderTemp-P  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 91 }
+	
+liionDifferentVolt-P  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 92 }
+	
+liionVoltBalance  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 93 }
+	
+liionDeltaVoltBalance  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 94 }
+	
+liionDisCharCurrLimit  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 95 }
+	
+liionCharCurrLimit  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 96 }
+	
+liionVoltDisCharRef  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 97 }
+	
+liionVoltDisCharCMD  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 98 }
+	
+liionSystemByte  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 99 }
+	
+liionKeyTime  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 100 }
+	
+liionIniMaxim  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 101 }
+	
+liionEnableKCS  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { liionBattStatusEntry 102 }
+
+liionADCPackVolt  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 103}
+
+liionADCBattVolt  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 104}
+
+liionADCPackCurr  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 105}
+
+liionADCBattCurr  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 106}
+
+liionSOC1  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 107}
+
+liionSOH1  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 108}
+
+liionFullCapRep2  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 109}
+
+liionVolt2  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 110}
+
+liionCurr2  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 111}
+
+liionCurr3  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 112}
+	
+liionSOC3  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 113}
+
+liionVpri3  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 114}
+
+liionVmes3  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 115}
+
+liionCap3  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 116}
+
+liionInternalR03  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 117}
+	
+liionEnableLock  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 118}
+
+liionCapInit  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { liionBattStatusEntry 119}
+
+-- the GenInfo table
+
+-- The GenInfo table contains information on Generator
+	
+genInstalledGen  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The number of installed Generator."
+	::= { genInfo 1 }
+
+genActiveGen  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of active Generator."
+	::= { genInfo 2 }
+
+genStatusTable  OBJECT-TYPE
+	SYNTAX SEQUENCE OF GenStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A table listing up to 2 generators"
+	::= { genInfo 3 }
+
+genStatusEntry  OBJECT-TYPE
+	SYNTAX 	GenStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A row of generator status data corresponding to the genInstalledPack value"
+	INDEX { genStatusID }
+	::= { genStatusTable 1 }
+
+GenStatusEntry ::= SEQUENCE {
+	genStatusID
+		Integer32,
+	genStatusStatus
+		INTEGER,
+	genStatusLNVolt1
+		Integer32,
+	genStatusLNVolt2
+		Integer32,
+	genStatusLNVolt3
+		Integer32,
+	genStatusLNCurr1
+		Integer32,
+	genStatusLNCurr2
+		Integer32,
+	genStatusLNCurr3
+		Integer32,
+	genStatusLNPower1
+		Integer32,
+	genStatusLNPower2
+		Integer32,
+	genStatusLNPower3
+		Integer32,
+	genStatusFrequency
+		Integer32,
+	genStatusBattVolt
+		Integer32,
+	genStatusCoolantTemp
+		Integer32,
+	genStatusOilPressure
+		Integer32,
+	genStatusFuelLevel
+		Integer32,
+	genStatusRunTime
+		Integer32,
+	genStatusOilTemp
+		Integer32,
+	genStatusMaintenanceTime
+		Integer32,
+	genStatusEngineSpeed
+		Integer32,
+	genStatusWorkingHour
+		Integer32,
+	genStatusWorkingMin
+		Integer32,
+	genStatusActiveEnergyLow
+		Integer32,
+	genStatusActiveEnergyHigh
+		Integer32,
+	genStatusAlarmStatus
+		Counter32,
+	genStatusType
+		INTEGER,
+	genStatusSerial
+		DisplayString,
+	genStatusModbusID
+		Integer32,
+	genStatusLNSPower1
+		Integer32,
+	genStatusLNSPower2
+		Integer32,
+	genStatusLNSPower3
+		Integer32,
+	genAutoMode
+		INTEGER,
+	genManualMode
+		INTEGER,
+	genStartMode
+		INTEGER,
+	genStopMode
+		INTEGER
+}
+
+genStatusID  OBJECT-TYPE
+	SYNTAX     Integer32 (1..100)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The gen ID number of the gen."
+	::= { genStatusEntry 1 }
+
+genStatusStatus  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		inActive (0),
+		noResponse (170),
+		fail (165),
+		normal (255)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The operational status of the gen record.
+		normal (0),
+		no response (226)
+		      
+		      "
+	::= { genStatusEntry 2 }
+
+genStatusLNVolt1  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Volt"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The voltage of Line-Neutral 1."
+	::= { genStatusEntry 3 }
+
+genStatusLNVolt2  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Volt"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The voltage of Line-Neutral 2."
+	::= { genStatusEntry 4 }
+
+genStatusLNVolt3  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Volt"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The voltage of Line-Neutral 3."
+	::= { genStatusEntry 5 }
+
+genStatusLNCurr1  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mA"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Current of Line 1."
+	::= { genStatusEntry 6 }
+
+genStatusLNCurr2  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mA"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Current of Line 2."
+	::= { genStatusEntry 7 }
+
+genStatusLNCurr3  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"mA"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Current of Line 3."
+	::= { genStatusEntry 8 }
+
+genStatusLNPower1  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"W"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Power of Line 1."
+	::= { genStatusEntry 9 }
+
+genStatusLNPower2  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"W"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Power of Line 2."
+	::= { genStatusEntry 10 }
+
+genStatusLNPower3  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"W"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Power of Line 3."
+	::= { genStatusEntry 11 }
+
+genStatusFrequency  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"Hz"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The gen Frequency."
+	::= { genStatusEntry 12 }
+
+genStatusBattVolt  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"W"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Battery Voltage."
+	::= { genStatusEntry 13 }
+
+genStatusCoolantTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"C degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The gen CoolantTemp."
+	::= { genStatusEntry 14 }
+
+genStatusOilPressure  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	""
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The genStatusOilPressure."
+	::= { genStatusEntry 15 }
+
+genStatusFuelLevel  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	""
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Gen Fuel Level."
+	::= { genStatusEntry 16 }
+
+genStatusRunTime  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"h"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Run Time."
+	::= { genStatusEntry 17 }
+
+genStatusOilTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"C degree"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The genStatusOilTemp."
+	::= { genStatusEntry 18 }
+
+genStatusMaintenanceTime  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"h"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The genStatusMaintenanceTime."
+	::= { genStatusEntry 19 }
+
+genStatusEngineSpeed  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"W"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The gen EngineSpeed."
+	::= { genStatusEntry 20 }
+
+genStatusWorkingHour  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"W"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { genStatusEntry 21 }
+
+genStatusWorkingMin  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"W"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { genStatusEntry 22 }
+
+genStatusActiveEnergyLow  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"W"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { genStatusEntry 23 }
+
+genStatusActiveEnergyHigh  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"W"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { genStatusEntry 24 }
+
+genStatusAlarmStatus  OBJECT-TYPE
+	SYNTAX     Counter32
+	UNITS 	""
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Alarm Status."
+	::= { genStatusEntry 25 }
+
+genStatusType  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		INVALID (0),
+		EMKO (1),
+		LISTER (2),
+		DEEPSEA (3),
+		LR2057(4),
+		HIMOINSA(5),
+		QC315(6),
+		CUMMIN_PS500(7),
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Gen Type."
+	::= { genStatusEntry 26 }
+
+genStatusSerial  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..32))
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The SN."
+	::= { genStatusEntry 27 }
+
+genStatusModbusID  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	""
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The ModbusID."
+	::= { genStatusEntry 28 }
+
+genStatusLNSPower1  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"W"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Power of Line 1."
+	::= { genStatusEntry 29 }
+
+genStatusLNSPower2  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"W"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Power of Line 2."
+	::= { genStatusEntry 30 }
+
+genStatusLNSPower3  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	"W"
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Power of Line 3."
+	::= { genStatusEntry 31 }
+	
+genAutoMode  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		OFF (0),
+		ON (1),
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Gen auto mode."
+	::= { genStatusEntry 32 }
+	
+genManualMode  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		OFF (0),
+		ON (1),
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Gen manual mode."
+	::= { genStatusEntry 33 }
+	
+genStartMode  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		OFF (0),
+		ON (1),
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Gen start mode."
+	::= { genStatusEntry 34 }
+	
+genStopMode  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		OFF (0),
+		ON (1),
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Gen start mode."
+	::= { genStatusEntry 35 }
+
+-- the PMInfo table
+
+-- The PMInfo table contains information on Power Meter
+	
+pmInstalledPM  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The number of installed Power Meter."
+	::= { pmInfo 1 }
+
+pmActivePM  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of active Power Meter."
+	::= { pmInfo 2 }
+
+pmStatusTable  OBJECT-TYPE
+	SYNTAX SEQUENCE OF PmStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A table listing up to 2 Power Meter"
+	::= { pmInfo 3 }
+
+pmStatusEntry  OBJECT-TYPE
+	SYNTAX 	PmStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A row of pm status data corresponding to the pmStatusNoIndex value"
+	INDEX { pmID }
+	::= { pmStatusTable 1 }
+
+PmStatusEntry ::= SEQUENCE {
+	pmID
+		Integer32,	
+	pmStatus
+		Integer32,	
+	pmImportActiveEnergy
+		Integer32,	
+	pmExportActiveEnergy
+		Integer32,
+	pmImportReactiveEnergy
+		Integer32,	
+	pmExportReactiveEnergy
+		Integer32,	
+	pmTotalActiveEnergy
+		Integer32,	
+	pmTotalReactiveEnergy
+		Integer32,	
+	pmActivePower
+		Integer32,	
+	pmReactivePower
+		Integer32,	
+	pmPowerFactor
+		Integer32,	
+	pmFrequency
+		Integer32,		
+	pmPhase1Current
+		Integer32,	
+	pmPhase1Voltage
+		Integer32,	
+	pmPhase1RealPower
+		Integer32,
+	pmPhase1ApparentPower
+		Integer32,	
+	pmPhase1ReactivePower
+		Integer32,	
+	pmPhase1PowerFactor
+		Integer32,
+	pmPhase2Current
+		Integer32,	
+	pmPhase2Voltage
+		Integer32,	
+	pmPhase2RealPower
+		Integer32,
+	pmPhase2ApparentPower
+		Integer32,	
+	pmPhase2ReactivePower
+		Integer32,	
+	pmPhase2PowerFactor
+		Integer32,
+	pmPhase3Current
+		Integer32,	
+	pmPhase3Voltage
+		Integer32,	
+	pmPhase3RealPower
+		Integer32,
+	pmPhase3ApparentPower
+		Integer32,	
+	pmPhase3ReactivePower
+		Integer32,
+	pmPhase3PowerFactor
+		Integer32,		
+	pmType
+		INTEGER,
+	pmSerial
+		DisplayString,
+	pmModbusID
+		Integer32,
+	pmModel
+		DisplayString,
+	pmOutOfRangeFreq
+		Integer32,
+	pmDeltaFreqDisConnect
+		Integer32,
+	pmDeltaFreqReConnect
+		Integer32,
+	pmEnableFreqTrap
+		Integer32,
+	pmTotalCurrent
+		Integer32,
+	pm_delta_hz_out
+		Integer32,
+    pm_cnt_timeout_freq_out
+	    Integer32,
+    pm_cnt_timeout_freq_in
+	    Integer32
+	pm_remaining_gen
+	    Integer32
+	pm_set_cnt_remaining_gen
+	    Integer32
+}
+
+pmID  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 1 }
+
+pmStatus  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of phase."
+	::= { pmStatusEntry 2 }
+
+pmImportActiveEnergy  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 3 }
+
+pmExportActiveEnergy  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 4 }
+
+pmImportReactiveEnergy  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of phase."
+	::= { pmStatusEntry 5 }
+
+pmExportReactiveEnergy  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 6 }
+
+pmTotalActiveEnergy  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of phase."
+	::= { pmStatusEntry 7 }
+
+pmTotalReactiveEnergy  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 8 }
+
+pmActivePower  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 9 }
+
+pmReactivePower  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 10 }
+
+pmPowerFactor  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 11 }
+
+pmFrequency  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 12 }
+	
+pmPhase1Current  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 13 }
+
+pmPhase1Voltage  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 14 }
+	
+pmPhase1RealPower  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 15 }
+
+pmPhase1ApparentPower  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 16 }
+	
+pmPhase1ReactivePower  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 17 }
+	
+pmPhase1PowerFactor  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 18 }
+	
+pmPhase2Current  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 19 }
+
+pmPhase2Voltage  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 20 }
+	
+pmPhase2RealPower  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 21 }
+
+pmPhase2ApparentPower  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 22 }
+	
+pmPhase2ReactivePower  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 23 }
+	
+pmPhase2PowerFactor  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 24 }
+	
+pmPhase3Current  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 25 }
+
+pmPhase3Voltage  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 26 }
+	
+pmPhase3RealPower  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 27 }
+
+pmPhase3ApparentPower  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 28 }
+	
+pmPhase3ReactivePower  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 29 }
+	
+pmPhase3PowerFactor  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pmStatusEntry 30 }
+
+pmType  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		INVALID (0),
+		FINECO (1),
+		ASCENT (2),
+		EASTRON (3),
+		CET1 (4),
+		PILOT (5),
+		FORLONG (6),
+		PILOT_3PHASE (15),
+		SCHNEIDER(17),
+		EASTRON_SDM72D(18),
+		IVY(19),
+		
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The PM Type."
+	::= { pmStatusEntry 31 }
+
+pmSerial  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..32))
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The SN."
+	::= { pmStatusEntry 32 }
+	
+pmModbusID  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	""
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The ModbusID."
+	::= { pmStatusEntry 33 }
+
+pmModel  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..32))
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The SN."
+	::= { pmStatusEntry 34 }
+pmOutOfRangeFreq OBJECT-TYPE
+	SYNTAX     Integer32{
+		IN (0),
+		OUT (1),
+	}
+	UNITS 	""
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The ModbusID."
+	::= { pmStatusEntry 35 }
+
+pmDeltaFreqDisConnect  OBJECT-TYPE
+	SYNTAX     Integer32 (1..10)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The pmDeltaFreqDisConnect."
+	::= { pmStatusEntry 36 }
+
+pmDeltaFreqReConnect  OBJECT-TYPE
+	SYNTAX     Integer32 (1..10)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The pmDeltaFreqReConnect."
+	::= { pmStatusEntry 37 }
+
+pmEnableFreqTrap  OBJECT-TYPE
+	SYNTAX     Integer32 {
+		Disable (0),
+		Enable (1),
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The pmDeltaFreqDisConnect."
+	::= { pmStatusEntry 38 }
+
+pmTotalCurrent OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"totalCurrent"
+	::= { pmStatusEntry 39 }
+
+pm_delta_hz_out  OBJECT-TYPE
+	SYNTAX     Integer32 (20..500)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The delta hz out (/10)."
+	::= { pmStatusEntry 40 }
+
+pm_cnt_timeout_freq_out  OBJECT-TYPE
+	SYNTAX     Integer32 (0..255)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The timeout freq out (/1)."
+	::= { pmStatusEntry 41 }
+
+pm_cnt_timeout_freq_in  OBJECT-TYPE
+	SYNTAX     Integer32 (0..255)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The timeout freq in (/1)."
+	::= { pmStatusEntry 42 }
+
+pm_remaining_gen  OBJECT-TYPE
+	SYNTAX     Integer32{
+		OFF  (0),
+		ON   (1),
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The remaining gen (/1)."
+	::= { pmStatusEntry 43 }
+
+pm_set_cnt_remaining_gen  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The cnt remaining gen max  (/1)."
+	::= { pmStatusEntry 44 }	
+
+
+
+-- the VACInfo table
+
+-- The VACInfo table contains information on VAC
+	
+vacInstalledVac  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The number of installed VAC."
+	::= { vacInfo 1 }
+
+vacActiveVac  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of active VAC."
+	::= { vacInfo 2 }
+
+vacStatusTable  OBJECT-TYPE
+	SYNTAX SEQUENCE OF VacStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A table listing up to 2 VAC"
+	::= { vacInfo 3 }
+
+vacStatusEntry  OBJECT-TYPE
+	SYNTAX 	VacStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A row of vac status data corresponding to the vacStatusNoIndex value"
+	INDEX { vacID }
+	::= { vacStatusTable 1 }
+
+VacStatusEntry ::= SEQUENCE {
+	vacID
+		Integer32,	
+	vacStatus
+		Integer32,	
+	vacInTemp
+		Integer32,	
+	vacExTemp
+		Integer32,
+	vacFrost1Temp
+		Integer32,	
+	vacFrost2Temp
+		Integer32,	
+	vacHumid
+		Integer32,	
+	vacFan1Duty
+		Integer32,	
+	vacFan1RPM
+		Integer32,		
+	vacFan2Duty
+		Integer32,	
+	vacFan2RPM
+		Integer32,		
+	vacAlarmStatus
+		Counter32,	
+	vacSysMode
+		Integer32,	
+	vacFanSpeedMode
+		Integer32,
+	vacWindMillTemp
+		Integer32,	
+	vacRampStart
+		Integer32,
+	vacPidOffsetTemp
+		Integer32,	
+	vacFanMinSpeed
+		Integer32,		
+	vacFanMaxSpeed
+		Integer32,		
+	vacFilterStuckTemp
+		Integer32,		
+	vacNightModeEn
+		Integer32,			
+	vacNightModeStart
+		Integer32,		
+	vacNightModeEnd
+		Integer32,	
+	vacNightMaxSpeed
+		Integer32,
+	vacManualMode
+		Integer32,
+	vacManualMaxSpeed
+		Integer32,	
+	vacInMaxTemp
+		Integer32,
+	vacExMaxTemp
+		Integer32,	
+	vacFrostMaxTemp
+		Integer32,	
+	vacInMinTemp
+		Integer32,	
+	vacExMinTemp
+		Integer32,	
+	vacFrostMinTemp
+		Integer32,	
+	vacMinOutTemp
+		Integer32,	
+	vacDeltaTemp
+		Integer32,	
+	vacPanicTemp
+		Integer32,	
+	vacActiveFan
+		Integer32,	
+	vacInstalledFan
+		Integer32,	
+	vacInstalledAirCon
+		Integer32,	
+	vacAirCon1Model
+		Integer32,	
+	vacAirCon1Type
+		Integer32,		
+	vacAirCon2Model
+		Integer32,	
+	vacAirCon2Type
+		Integer32,	
+	vacAirConOnOff
+		Integer32,	
+	vacAirConMode
+		Integer32,	
+	vacAirConTemp
+		Integer32,	
+	vacAirConSpeed
+		Integer32,	
+	vacAircondDir
+		Integer32,
+	vacAirConVolt
+		Integer32,
+	vacAirConCurrent
+		Integer32,
+	vacAirConPower
+		Integer32,
+	vacAirConFrequency
+		Integer32,
+	vacAirConPF
+		Integer32,
+	vacRealTimeSync
+		DisplayString,
+	vacType
+		INTEGER,
+	vacSerial
+		DisplayString,
+	vacModbusID
+		Integer32,
+	vacFirmVersion
+		Integer32,
+	vacWEnable
+		Integer32,
+	vacWSerial1
+		Integer32,
+	vacWSerial2
+		Integer32,
+	vacEnableReset
+		Integer32,
+	vacUpdateStep
+		Integer32
+}
+
+vacID  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 1 }
+
+vacStatus  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 2 }
+
+vacInTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 3 }
+
+vacExTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 4 }
+
+vacFrost1Temp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 5 }
+
+vacFrost2Temp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 6 }
+
+vacHumid  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 7 }
+
+vacFan1Duty  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 8 }
+
+vacFan1RPM  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 9 }
+
+vacFan2Duty  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 10 }
+
+vacFan2RPM  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 11 }
+
+vacAlarmStatus  OBJECT-TYPE
+	SYNTAX     Counter32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 12 }
+
+vacSysMode  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 13 }
+
+vacFanSpeedMode  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 14 }
+
+vacWindMillTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 15 }
+
+vacRampStart  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 16 }
+
+vacPidOffsetTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 17 }
+
+vacFanMinSpeed  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 18 }
+
+vacFanMaxSpeed  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 19 }
+
+vacFilterStuckTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 20 }
+
+vacNightModeEn  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 21 }
+
+vacNightModeStart  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 22 }
+
+vacNightModeEnd  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 23 }
+
+vacNightMaxSpeed  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 24 }
+
+vacManualMode  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 25 }
+
+vacManualMaxSpeed  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 26 }
+
+vacInMaxTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 27 }
+
+vacExMaxTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 28 }
+
+vacFrostMaxTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 29 }
+
+vacInMinTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 30 }
+
+vacExMinTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 31 }
+
+vacFrostMinTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 32 }
+
+vacMinOutTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 33 }
+
+vacDeltaTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 34 }
+
+vacPanicTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 35 }
+
+vacActiveFan  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 36 }
+
+vacInstalledFan  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 37 }
+
+vacInstalledAirCon  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 38 }
+
+vacAirCon1Model  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 39 }
+
+vacAirCon1Type  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 40 }
+
+vacAirCon2Model  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 41 }
+
+vacAirCon2Type  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 42 }
+
+vacAirConOnOff  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 43 }
+
+vacAirConMode  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 44 }
+
+vacAirConTemp  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 45 }
+
+vacAirConSpeed  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 46 }
+
+vacAircondDir  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 47 }
+
+vacAirConVolt  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 48 }
+
+vacAirConCurrent  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 49 }
+
+vacAirConPower  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 50 }
+
+vacAirConFrequency  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 51 }
+
+vacAirConPF  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 52 }
+
+vacRealTimeSync  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..255))
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 53 }
+
+vacType  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		INVALID (0),
+		VIETTEL (1)
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 54 }
+
+vacSerial  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..255))
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 55 }
+
+vacModbusID  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 56 }
+
+vacFirmVersion  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 57 }
+
+vacWEnable	OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 58 }
+
+vacWSerial1	OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 59 }
+
+vacWSerial2	OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 60}
+
+vacEnableReset	OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 61}
+
+vacUpdateStep	OBJECT-TYPE
+	SYNTAX     Integer32 {
+		Normal (0),
+		Wait_File (1),
+		Receiv_OK(2),
+		Sending_File(3),
+		Send_OK(4),
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { vacStatusEntry 62 }
+
+configBTEndVolt  OBJECT-TYPE
+	SYNTAX     Integer32 (400..530)
+	UNITS 	"1/10 Volt; i.e. 440 = 44.0V"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The End Volt in Battery Test Mode"
+	::= { configBattTestInfo 1 }
+	
+configBTEndCap  OBJECT-TYPE
+	SYNTAX     Integer32 (0..99)
+	UNITS 	"%; i.e. 10 = 10%"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The End Capacity in Battery Test Mode"
+	::= { configBattTestInfo 2 }
+	
+configBTEndTime  OBJECT-TYPE
+	SYNTAX     Integer32 (1..1440)
+	UNITS 	"Minute; i.e. 8 = 8m"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The End Time in Battery Test Mode."
+	::= { configBattTestInfo 3 }
+	
+configBTPlanTestNum  OBJECT-TYPE
+	SYNTAX     Integer32 (1..4)
+	UNITS 	""
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Planned Test Number."
+	::= { configBattTestInfo 4 }
+		
+configPlanTestEn  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		disable (0),
+		enable (1)
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"This enable/disable Planned Test."
+	::= { configBattTestInfo 5 }
+	
+configBTSCUNum  OBJECT-TYPE
+	SYNTAX     Integer32 (1..4)
+	UNITS 	""
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The SCU Time."
+	::= { configBattTestInfo 6 }
+
+planTestStatusTable  OBJECT-TYPE
+	SYNTAX SEQUENCE OF PlanTestStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A table listing up to 4 planned tests"
+	::= { configBattTestInfo 7 }
+
+planTestStatusEntry  OBJECT-TYPE
+	SYNTAX 	PlanTestStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A row of planned test status data corresponding to the planTestStatusNoIndex value"
+	INDEX { planTestStatusID }
+	::= { planTestStatusTable 1 }
+
+PlanTestStatusEntry ::= SEQUENCE {
+	planTestStatusID
+		Integer32,
+	planTestStatusMonth
+		Integer32,
+	planTestStatusDate
+		Integer32,
+	planTestStatusHour
+		Integer32
+}
+
+planTestStatusID  OBJECT-TYPE
+	SYNTAX     Integer32 (1..5)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The BlockTime ID number of the BlockTime."
+	::= { planTestStatusEntry 1 }
+
+planTestStatusMonth  OBJECT-TYPE
+	SYNTAX     Integer32 (1..12)
+	UNITS 	"Month"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Month Setting of Plan Test."
+	::= { planTestStatusEntry 2 }
+
+planTestStatusDate  OBJECT-TYPE
+	SYNTAX     Integer32 (0..31)
+	UNITS 	"Date"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Date Setting of Plan Test."
+	::= { planTestStatusEntry 3 }
+
+planTestStatusHour  OBJECT-TYPE
+	SYNTAX     Integer32 (0..23)
+	UNITS 	"Hours"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Hour Setting of Plan Test."
+	::= { planTestStatusEntry 4 }
+	
+scuTimeStatusTable  OBJECT-TYPE
+	SYNTAX SEQUENCE OF ScuTimeStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A table listing up to 4 planned tests"
+	::= { configBattTestInfo 8 }
+
+scuTimeStatusEntry  OBJECT-TYPE
+	SYNTAX 	ScuTimeStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A row of planned test status data corresponding to the scuTimeStatusNoIndex value"
+	INDEX { scuTimeStatusID }
+	::= { scuTimeStatusTable 1 }
+
+ScuTimeStatusEntry ::= SEQUENCE {
+	scuTimeStatusID
+		Integer32,
+	scuTimeStatusYear
+		Integer32,
+	scuTimeStatusMonth
+		Integer32,
+	scuTimeStatusDate
+		Integer32,
+	scuTimeStatusHour
+		Integer32,
+	scuTimeStatusMinute
+		Integer32,
+	scuTimeStatusSecond
+		Integer32
+}
+
+scuTimeStatusID  OBJECT-TYPE
+	SYNTAX     Integer32 (1..5)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The BlockTime ID number of the BlockTime."
+	::= { scuTimeStatusEntry 1 }
+	
+scuTimeStatusYear  OBJECT-TYPE
+	SYNTAX     Integer32 (2000..2099)
+	UNITS 	"Month"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Year Setting of SCU."
+	::= { scuTimeStatusEntry 2 }
+
+scuTimeStatusMonth  OBJECT-TYPE
+	SYNTAX     Integer32 (1..12)
+	UNITS 	"Month"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Month Setting of SCU Time."
+	::= { scuTimeStatusEntry 3 }
+
+scuTimeStatusDate  OBJECT-TYPE
+	SYNTAX     Integer32 (0..31)
+	UNITS 	"Date"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Date Setting of SCU Time."
+	::= { scuTimeStatusEntry 4 }
+
+scuTimeStatusHour  OBJECT-TYPE
+	SYNTAX     Integer32 (0..23)
+	UNITS 	"Hours"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Hour Setting of SCU Time."
+	::= { scuTimeStatusEntry 5 }
+
+scuTimeStatusMinute  OBJECT-TYPE
+	SYNTAX     Integer32 (0..59)
+	UNITS 	"Date"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Minute Setting of SCU Time."
+	::= { scuTimeStatusEntry 6 }
+
+scuTimeStatusSecond  OBJECT-TYPE
+	SYNTAX     Integer32 (0..59)
+	UNITS 	"Hours"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Second Setting of SCU Time."
+	::= { scuTimeStatusEntry 7 }
+
+
+configZTETestVolt  OBJECT-TYPE
+	SYNTAX     Integer32 (400..530)
+	UNITS 	"1/10 Volt; i.e. 440 = 44.0V"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The End Volt in Battery Test Mode"
+	::= { configBattTestInfo 9 }
+	
+configZTEAutoTestDay  OBJECT-TYPE
+	SYNTAX     Integer32 (14..365)
+	UNITS 	""
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The AutoTestDay in Battery Test Mode"
+	::= { configBattTestInfo 10 }
+	
+configZTEStartTime  OBJECT-TYPE
+	SYNTAX     Integer32 (0..23)
+	UNITS 	""
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The StartTime in Battery Test Mode"
+	::= { configBattTestInfo 11 }
+	
+configAgissonStartTest  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		disable (0),
+		enable (1)		
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The start enable ."
+	::= { configBattTestInfo 12 }
+	
+configAgissonStopTest  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		disable (0),
+		enable (1)		
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The start enable ."
+	::= { configBattTestInfo 13 }
+	
+configWalkInTimeEn  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		disable (0),
+		enable (1)		
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The system's walk-in time enable ."
+	::= { configurationInfo 1 }
+	
+configSystemSiteInfoWalkInTimeDuration  OBJECT-TYPE
+	SYNTAX     Integer32 (1..24000)
+	UNITS 	"Second; i.e. 8 = 8s"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The system's Walk-in Time Duration."
+	::= { configurationInfo 2 }
+	
+configBatteryChargeCurrentLimitValue  OBJECT-TYPE
+	SYNTAX     Integer32 (0..40)
+	UNITS 	"Amperes or DeciAmperes"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"Battery charging current limit value. Used only when AC source is mains feed.
+		Note that the units measured may be i Amperes or in Deciamperes depending on global system settings"
+	::= { configurationInfo 3 }
+
+configBatteryFloatVolt OBJECT-TYPE
+	SYNTAX     Integer32 (4200..6000)
+	UNITS 	"1/100 Volt; i.e. 5400 = 54.00V"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Voltage at which the DC System float charges.
+		Acts as reference voltage when running temperature compensated charging."
+	::= { configurationInfo 4 }
+
+configBatteryBoostVolt  OBJECT-TYPE
+	SYNTAX     Integer32 (4200..6000)
+	UNITS 	"1/100 Volt; i.e. 5400 = 54.00V"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Voltage at which the DC System boost charges the batteries."
+	::= { configurationInfo 5 }
+
+configBatteryLLVDAlarmVoltage  OBJECT-TYPE
+	SYNTAX     Integer32
+	UNITS 	"1/100 Volt; i.e. 5400 = 54.00V"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Major Low Battery Voltage Alarm limit set voltage"
+	::= { configurationInfo 6 }
+
+configBatteryDCLowAlarmVoltage  OBJECT-TYPE
+	SYNTAX     Integer32
+	UNITS 	"1/100 Volt; i.e. 5400 = 54.00V"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Minor Low Battery Voltage Alarm limit set voltage"
+	::= { configurationInfo 7 }
+
+configBatteryStartManualTest  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		auto (0),
+		manual (1)
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"This pushbutton will start or stop a manual battery test if the system allows it."
+	::= { configurationInfo 8 }
+
+configBatteryTempCompValue  OBJECT-TYPE
+	SYNTAX     Integer32
+	UNITS	"1/100 mV\deg.C; i.e. 7200 = 72.00 mV\deg.C"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"This is battery temperature Compensation Value."
+	::= { configurationInfo 9 }
+
+configBatteryBLVDAlarmVoltage  OBJECT-TYPE
+	SYNTAX     Integer32 (4200..6000)
+	UNITS 	"1/100 Volt; i.e. 5400 = 54.00V"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Battery Contactors Disconnect Voltage"
+	::= { configurationInfo 10 }
+
+
+configBatteryCapacityTotal  OBJECT-TYPE
+	SYNTAX     Integer32 (50..5000)
+	UNITS 	"Ah/%;  23 = 23 Ah or in %"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"This is the total Capacity of the battery. This value is the installed capacity 
+		compensated with the last battery tests quality level"
+	REFERENCE 
+		"BatteryTotCap"
+	::= { configurationInfo 11 }
+
+configBatteryHighMajorTempAlarmLevel  OBJECT-TYPE
+	SYNTAX     Integer32 (1000..10000)
+	UNITS 	"1/100 Deg. C/F; i.e. 2500 = 25 Deg."
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"This is the Major High Temperature Alarm level."
+	::= { configurationInfo 12 }
+	
+configAcLowLevel  OBJECT-TYPE
+	SYNTAX     Integer32 (50..300)
+	UNITS 	" Volt."
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"This is the AC Low Alarm level."
+	::= { configurationInfo 13 }
+	
+configBatteryCapacityTotal2  OBJECT-TYPE
+	SYNTAX     Integer32 (50..5000)
+	UNITS 	"Ah/%;  23 = 23 Ah or in %"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"This is the total Capacity of the battery. This value is the installed capacity 
+		compensated with the last battery tests quality level"
+	REFERENCE 
+		"BatteryTotCap"
+	::= { configurationInfo 14 }
+
+configBatteryDCUnderAlarmVoltage  OBJECT-TYPE
+	SYNTAX     Integer32
+	UNITS 	"1/100 Volt; i.e. 5400 = 54.00V"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The Under DC voltage"
+	::= { configurationInfo 15 }
+	
+configLLVDEn  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		disable (0),
+		enable (1)		
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The system's LLVD enable ."
+	::= { configurationInfo 16 }
+	
+configBLVDEn  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		disable (0),
+		enable (1)		
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The system's BLVD enable ."
+	::= { configurationInfo 17 }
+
+configBatteryChargeCurrentLimitValue_DPC_A  OBJECT-TYPE
+	SYNTAX     Integer32 (1000..99900)
+	UNITS 	"Amperes or DeciAmperes"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"Battery charging current limit value. Used only when AC source is mains feed.
+		Note that the units measured may be i Amperes or in Deciamperes depending on global system settings"
+	::= { configurationInfo 18 }
+
+configBatteryCapacityTotal3  OBJECT-TYPE
+	SYNTAX     Integer32 (50..5000)
+	UNITS 	"Ah/%;  23 = 23 Ah or in %"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"This is the total Capacity of the battery. This value is the installed capacity 
+		compensated with the last battery tests quality level"
+	REFERENCE 
+		"BatteryTotCap"
+	::= { configurationInfo 19 }
+
+configBatteryCapacityTotal4  OBJECT-TYPE
+	SYNTAX     Integer32 (50..5000)
+	UNITS 	"Ah/%;  23 = 23 Ah or in %"
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"This is the total Capacity of the battery. This value is the installed capacity 
+		compensated with the last battery tests quality level"
+	REFERENCE 
+		"BatteryTotCap"
+	::= { configurationInfo 20 }
+
+-- Be aware that it is no validation against the Major High Temperature Alarm Level
+-- and therefore it is possible to set this value higher than the Major High Temperature Level.
+-- The consequense of doing this will be that the alarm will not be tripped until the 
+-- Minor High Temperature Level has been reached.
+
+alarmMajorBatteryHighTemp  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		nosensor (5),
+		notconfig (32),
+		alarm (2)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Major High Battery Temperature alarm."
+	::= { alarmWellknownAlarms 1 }
+
+alarmLLVD  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Load Low Voltage Disconnect (LLVD) alarm."
+	::= { alarmWellknownAlarms 2 }
+
+alarmBLVD  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The Battery Low Voltage Disconnect (BLVD) alarm."
+	::= { alarmWellknownAlarms 3 }
+
+alarmDCLow  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The DC Low Voltage Disconnect (DC Low) alarm."
+	::= { alarmWellknownAlarms 4 }
+
+alarmACmains  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The AC voltage has dropped below critical level, or one or more AC input phases was lost."
+	::= { alarmWellknownAlarms 5 }
+
+alarmBatteryBreakerOpen  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"A battery breaker/fuse alarm."
+	::= { alarmWellknownAlarms 6 }
+
+alarmDistributionBreakerOpen  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"A Load Distribution breaker/fuse alarm."
+	::= { alarmWellknownAlarms 7 }
+
+alarmRectifierFault  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"This indicates that Rectifier has AC Fault."
+	::= { alarmWellknownAlarms 8 }
+
+alarmRectifierNoResp  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"This indicates that Rectifier is not responding."
+	::= { alarmWellknownAlarms 9 }
+	
+alarmManualModeActivated  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"This indicates Manual Mode is activated."
+	::= { alarmWellknownAlarms 10 }
+	
+alarmACLow  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"This indicates that there is AC Low alarm."
+	::= { alarmWellknownAlarms 11 }
+	
+alarmSmoke  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"This indicates that there is Smoke alarm."
+	::= { alarmWellknownAlarms 12 }
+	
+alarmEnvDoor  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"This indicates that there is Door Open alarm."
+	::= { alarmWellknownAlarms 13 }
+	
+alarmLiB  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"This indicates alarmLiB alarm."
+	::= { alarmWellknownAlarms 14 }
+	
+alarmGen  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"This indicates alarmGen alarm."
+	::= { alarmWellknownAlarms 15 }
+	
+alarmBM  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"This indicates alarmBM alarm."
+	::= { alarmWellknownAlarms 16 }
+
+alarmVAC  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"This indicates alarmVAC alarm."
+	::= { alarmWellknownAlarms 17 }
+	
+alarmDigitalInput1  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The DigitalInput1 Alarm"
+	::= { alarmDigitalInputAlarms 1 }
+	
+alarmDigitalInput2  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The DigitalInput2 Alarm"
+	::= { alarmDigitalInputAlarms 2 }
+	
+alarmDigitalInput3  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The DigitalInput3 Alarm"
+	::= { alarmDigitalInputAlarms 3 }
+	
+alarmDigitalInput4  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The DigitalInput4 Alarm"
+	::= { alarmDigitalInputAlarms 4 }
+	
+alarmDigitalInput5  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The DigitalInput5 Alarm"
+	::= { alarmDigitalInputAlarms 5 }
+	
+alarmDigitalInput6  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The DigitalInput6 Alarm"
+	::= { alarmDigitalInputAlarms 6 }
+	
+alarmDigitalInput7  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The DigitalInput7 Alarm"
+	::= { alarmDigitalInputAlarms 7 }
+	
+alarmDigitalInput8  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The DigitalInput8 Alarm"
+	::= { alarmDigitalInputAlarms 8}
+	
+alarmLiBConnect  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The alarmLiBConnect Alarm"
+	::= { alarmConnectionAlarms 1 }
+	
+alarmPMUConnect  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The alarmPMUConnect Alarm"
+	::= { alarmConnectionAlarms 2 }
+	
+alarmGenConnect  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The alarmGenConnect Alarm"
+	::= { alarmConnectionAlarms 3 }
+	
+alarmBMConnect  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The alarmBMConnect Alarm"
+	::= { alarmConnectionAlarms 4 }
+	
+alarmPMConnect  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The alarmPMConnect Alarm"
+	::= { alarmConnectionAlarms 5 }
+	
+alarmVACConnect  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0),
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The alarmVACConnect Alarm"
+	::= { alarmConnectionAlarms 6 }
+	
+alarmSMCBConnect  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0)
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The alarmSMCBConnect Alarm"
+	::= { alarmConnectionAlarms 7 }
+		
+alarmFUELConnect  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0)
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The alarmFUELConnect Alarm"
+	::= { alarmConnectionAlarms 8 }
+
+alarmISENSEConnect  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0)
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The alarmISENSEConnect Alarm"
+	::= { alarmConnectionAlarms 9 }
+
+alarm_pm_dc_Connect  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0)
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The alarm_pm_dc_Connect Alarm"
+	::= { alarmConnectionAlarms 10 }
+
+alarm_dpc_fan_Connect  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		normal (0)
+		alarm (1)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The alarm_dpc_fan_Connect Alarm"
+	::= { alarmConnectionAlarms 11 }
+-- the smcbInfo table
+
+smcbInstalledSMCB  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The number of installed Smart SMCB."
+	::= { smcbInfo 1 }
+	
+smcbActivePack  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of active Liion Smart SMCB."
+	::= { smcbInfo 2 }	
+	
+smcbStatusTable  OBJECT-TYPE
+	SYNTAX SEQUENCE OF smcbStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A table listing up to 5 lithium Smart SMCB"
+	::= { smcbInfo 3 }
+	
+smcbStatusEntry  OBJECT-TYPE
+	SYNTAX 	smcbStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"    "
+	INDEX { smcbID }
+	::= { smcbStatusTable 1 }	
+	
+smcbStatusEntry ::= SEQUENCE {
+	smcbID
+		Integer32,
+	smcbStatus
+		Integer32,
+	smcbState
+		Integer32,	
+	smcbType
+		Integer32,	
+	smcbModbusID
+		Integer32
+}
+
+smcbID  OBJECT-TYPE
+	SYNTAX     Integer32 (1..5)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { smcbStatusEntry 1 }
+	
+smcbStatus  OBJECT-TYPE
+	SYNTAX     Integer32 {
+		inActive (0),
+		noResponse (170),
+		fail (165),
+		normal (255)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"  "
+	::= { smcbStatusEntry 2 }
+	
+smcbState  OBJECT-TYPE
+	SYNTAX     Integer32 {
+		OFF (0),
+		ON (1),
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		" "
+	::= { smcbStatusEntry 3 }
+	
+smcbType  OBJECT-TYPE
+	SYNTAX     Integer32 {
+		INVALID (0),
+		OPEN (1),
+		MATIS (2),
+		GOL (3),
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"  "
+	::= { smcbStatusEntry 4 }
+		
+smcbModbusID  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"  "
+	::= { smcbStatusEntry 5 }
+	
+-- the fuelInfo table
+
+fuelInstalledFUEL  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The number of installed Smart SMCB."
+	::= { fuelInfo 1 }
+	
+fuelActivePack  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of active Liion Smart SMCB."
+	::= { fuelInfo 2 }	
+	
+fuelStatusTable  OBJECT-TYPE
+	SYNTAX SEQUENCE OF smcbStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A table listing up to 2 fuel sensor"
+	::= { fuelInfo 3 }
+	
+fuelStatusEntry  OBJECT-TYPE
+	SYNTAX 	fuelStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"    "
+	INDEX { fuelID }
+	::= { fuelStatusTable 1 }	
+	
+fuelStatusEntry ::= SEQUENCE {
+	fuelID
+		Integer32,
+	fuelStatus
+		Integer32,	
+	fuelType
+		Integer32,
+	fuelFuelLevel
+		Integer32,
+	fuelModbusID
+		Integer32
+}
+
+fuelID  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { fuelStatusEntry 1 }
+	
+fuelStatus  OBJECT-TYPE
+	SYNTAX     Integer32 {
+		inActive (0),
+		noResponse (170),
+		fail (165),
+		normal (255)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"  "
+	::= { fuelStatusEntry 2 }
+	
+fuelType  OBJECT-TYPE
+	SYNTAX     Integer32 {
+		INVALID (0),
+		HPT621 (1),
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"  "
+	::= { fuelStatusEntry 3 }
+	
+fuelFuelLevel  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"  "
+	::= { fuelStatusEntry 4 }
+	
+fuelModbusID  OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"  "
+	::= { fuelStatusEntry 5 }
+	
+
+-- the ISENSEInfo table
+
+-- The ISENSEInfo table contains information on Power Meter
+	
+isenseInstalledISENSE  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The number of installed Power Meter."
+	::= { isenseInfo 1 }
+
+isenseActiveISENSE  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of active Power Meter."
+	::= { isenseInfo 2 }
+
+isenseStatusTable  OBJECT-TYPE
+	SYNTAX SEQUENCE OF PmStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A table listing up to 2 Power Meter"
+	::= { isenseInfo 3 }
+
+isenseStatusEntry  OBJECT-TYPE
+	SYNTAX 	PmStatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A row of isense status data corresponding to the isenseStatusNoIndex value"
+	INDEX { isenseID }
+	::= { isenseStatusTable 1 }
+
+IsenseStatusEntry ::= SEQUENCE {
+	isenseID
+		Integer32,	
+	isenseStatus
+		Integer32,	
+	isenseImportActiveEnergy
+		Integer32,	
+	isenseExportActiveEnergy
+		Integer32,
+	isenseImportReactiveEnergy
+		Integer32,	
+	isenseExportReactiveEnergy
+		Integer32,	
+	isenseTotalActiveEnergy
+		Integer32,	
+	isenseTotalReactiveEnergy
+		Integer32,	
+	isenseActivePower
+		Integer32,	
+	isenseReactivePower
+		Integer32,	
+	isenseApparentPower
+		Integer32,
+	isensePowerFactor
+		Integer32,	
+	isenseFrequency
+		Integer32,		
+	isenseCurrent
+		Integer32,	
+	isenseVoltage
+		Integer32,			
+	isenseType
+		INTEGER,
+	isenseSerial
+		DisplayString,
+	isenseModbusID
+		Integer32,
+	isenseModel
+		DisplayString,
+	isenseOutOfRangeFreq
+		Integer32,
+	isenseDeltaFreqDisConnect
+		Integer32,
+	isenseDeltaFreqReConnect
+		Integer32,
+	isenseEnableFreqTrap
+		Integer32,
+	isense_delta_hz_out
+	    Integer32,
+	isense_cnt_timeout_freq_out
+	    Integer32,
+	isense_cnt_timeout_freq_in
+	    Integer32
+
+}
+
+isenseID  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { isenseStatusEntry 1 }
+
+isenseStatus  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of phase."
+	::= { isenseStatusEntry 2 }
+
+isenseImportActiveEnergy  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { isenseStatusEntry 3 }
+
+isenseExportActiveEnergy  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { isenseStatusEntry 4 }
+
+isenseImportReactiveEnergy  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of phase."
+	::= { isenseStatusEntry 5 }
+
+isenseExportReactiveEnergy  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { isenseStatusEntry 6 }
+
+isenseTotalActiveEnergy  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of phase."
+	::= { isenseStatusEntry 7 }
+
+isenseTotalReactiveEnergy  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { isenseStatusEntry 8 }
+
+isenseActivePower  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { isenseStatusEntry 9 }
+
+isenseReactivePower  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { isenseStatusEntry 10 }
+
+isenseApparentPower  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { isenseStatusEntry 11 }
+
+isensePowerFactor  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { isenseStatusEntry 12 }
+
+isenseFrequency  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { isenseStatusEntry 13 }
+	
+isenseCurrent  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { isenseStatusEntry 14 }
+
+isenseVoltage  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { isenseStatusEntry 15 }
+
+isenseType  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		INVALID (0),
+		FORLONG (1),
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The ISENSE Type."
+	::= { isenseStatusEntry 16 }
+
+isenseSerial  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..32))
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The SN."
+	::= { isenseStatusEntry 17 }
+	
+isenseModbusID  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	""
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The ModbusID."
+	::= { isenseStatusEntry 18 }
+
+isenseModel  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..32))
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The SN."
+	::= { isenseStatusEntry 19 }
+	
+isenseOutOfRangeFreq OBJECT-TYPE
+	SYNTAX     Integer32{
+		IN (0),
+		OUT (1),
+	}
+	UNITS 	""
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The ModbusID."
+	::= { isenseStatusEntry 20 }
+
+isenseDeltaFreqDisConnect  OBJECT-TYPE
+	SYNTAX     Integer32 (1..10)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The isenseDeltaFreqDisConnect."
+	::= { isenseStatusEntry 21 }
+
+isenseDeltaFreqReConnect  OBJECT-TYPE
+	SYNTAX     Integer32 (1..10)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The isenseDeltaFreqReConnect."
+	::= { isenseStatusEntry 22 }
+
+isenseEnableFreqTrap  OBJECT-TYPE
+	SYNTAX     Integer32 {
+		Disable (0),
+		Enable (1),
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The isenseDeltaFreqDisConnect."
+	::= { isenseStatusEntry 23 }
+
+isense_delta_hz_out  OBJECT-TYPE
+	SYNTAX     Integer32 (20..500)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The delta hz out (/10)."
+	::= { isenseStatusEntry 24 }	
+
+isense_cnt_timeout_freq_out  OBJECT-TYPE
+	SYNTAX     Integer32 (0..255)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The cnt timeout freq out (/1)."
+	::= { isenseStatusEntry 25 }	
+
+isense_cnt_timeout_freq_in  OBJECT-TYPE
+	SYNTAX     Integer32 (0..255)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The cnt timeout freq in (/1)."
+	::= { isenseStatusEntry 26 }
+
+
+-- the pm dc Info table
+
+-- The pm dc Info table contains information on Power Meter DC
+pm_dc_Installed_pm_dc  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The number of installed Power Meter DC."
+	::= { pmdcInfo 1 }
+
+pm_dc_Active_pm_dc  OBJECT-TYPE
+	SYNTAX     Integer32 (1..101)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of active Power Meter DC."
+	::= { pmdcInfo 2 }
+
+pm_dc_StatusTable  OBJECT-TYPE
+	SYNTAX SEQUENCE OF pm_dc_StatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A table listing up to 1 Power Meter DC"
+	::= { pmdcInfo 3 }
+
+pm_dc_StatusEntry  OBJECT-TYPE
+	SYNTAX 	pm_dc_StatusEntry
+	MAX-ACCESS not-accessible
+	STATUS     current
+	DESCRIPTION 
+		"A row of isense status data corresponding to the pm_dc_StatusNoIndex value"
+	INDEX { pm_dc_ID }
+	::= { pm_dc_StatusTable 1 }
+
+pm_dc_StatusEntry ::= SEQUENCE {
+	pm_dc_ID
+		Integer32,	
+	pm_dc_Status
+		Integer32,		
+	pm_dc_ActiveEnergy
+		Integer32,	
+	pm_dc_ActivePower
+		Integer32,			
+	pm_dc_Current
+		Integer32,	
+	pm_dc_Voltage
+		Integer32,			
+	pm_dc_Type
+		INTEGER,
+	pm_dc_ModbusID
+		Integer32,
+	pm_dc_Model
+		DisplayString
+}
+pm_dc_ID  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pm_dc_StatusEntry 1 }
+
+pm_dc_Status  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of phase."
+	::= { pm_dc_StatusEntry 2 }
+
+pm_dc_ActiveEnergy  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The number of phase."
+	::= { pm_dc_StatusEntry 3 }
+
+pm_dc_ActivePower  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pm_dc_StatusEntry 4 }
+
+pm_dc_Current  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pm_dc_StatusEntry 5 }
+
+pm_dc_Voltage  OBJECT-TYPE
+	SYNTAX     Integer32 (1..3)
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { pm_dc_StatusEntry 6 }
+
+pm_dc_Type  OBJECT-TYPE
+	SYNTAX     INTEGER {
+		INVALID (0),
+		YADA_DC (1),
+	}
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION 
+		"The PM DC Type."
+	::= { pm_dc_StatusEntry 7 }
+
+pm_dc_ModbusID  OBJECT-TYPE
+	SYNTAX     Integer32 (0..65535)
+	UNITS 	""
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The ModbusID."
+	::= {  pm_dc_StatusEntry 8 }
+
+pm_dc_Model  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..32))
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		"The SN."
+	::= {  pm_dc_StatusEntry 9 }
+
+--counter
+
+EMER_cnt  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { Cnt 1 }
+
+EMERV21_cnt  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { Cnt 2 }
+
+ZTE_cnt  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { Cnt 3 }
+
+HW_cnt  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { Cnt 4 }
+
+ModbusRTU_cnt  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { Cnt 5 }
+
+EMER_State  OBJECT-TYPE
+	SYNTAX     Integer32 {
+		SYSINFO_REQ  (32),
+        SYSINFO_RES  (33),
+        RECTINFO_REQ (34),
+        RECTINFO_RES (35),
+        ACINFO_REQ   (36),
+        ACINFO_RES   (37),
+        ALARM_DC_REQ (38),
+        ALARM_DC_RES (39),
+        ALARM_RECT_REQ (40),
+        ALARM_RECT_RES (41),
+        ALARM_AC_REQ   (42),
+        ALARM_AC_RES   (43),
+        ALARM_MAN_REQ  (44),
+        ALARM_MAN_RES  (45),
+        BATT_FLOATVOLTAGE_REQ (46),
+        BATT_FLOATVOLTAGE_RES (47),
+        BATT_BOOSTVOLTAGE_REQ (48),
+        BATT_BOOSTVOLTAGE_RES (49),
+        BATT_TEMPCOMPEN_REQ   (50),
+        BATT_TEMPCOMPEN_RES   (51),
+        BATT_LLVDEN_REQ  (52),
+        BATT_LLVDEN_RES  (53),
+        BATT_BLVDEN_REQ  (54),
+        BATT_BLVDEN_RES  (55),
+        BATT_LLVD_REQ    (56),
+        BATT_LLVD_RES    (57),
+        BATT_BLVD_REQ    (58),
+        BATT_BLVD_RES    (59),
+        BATT_DCLOW_REQ   (60),
+        BATT_DCLOW_RES   (61),
+        BATT_DCUNDER_REQ (62),
+        BATT_DCUNDER_RES (63),
+        BATT_DCOVER_REQ  (64),
+        BATT_DCOVER_RES  (65),
+        BATT_STRING_REQ  (66),
+        BATT_STRING_RES  (67),
+        BATT_STDCAP_REQ  (68),
+        BATT_STDCAP_RES  (69),
+        BATT_CURRLIMIT_REQ  (70),
+        BATT_CURRLIMIT_RES  (71),
+        BATT_HIGHTEMPALARM_REQ (72),
+        BATT_HIGHTEMPALARM_RES (73),
+        BATT_OVERTEMPALARM_REQ (74),
+        BATT_OVERTEMPALARM_RES (75),
+        SYS_WALKINTIMEDUR_REQ  (76),
+        SYS_WALKINTIMEDUR_RES  (77),
+        SYS_WALKINTIMEEN_REQ   (78),
+        SYS_WALKINTIMEEN_RES   (79),
+        ATSINFO_REQ (80),
+        ATSINFO_RES (81),
+        CHARGERINFO_REQ (82),
+        CHARGERINFO_RES (83),
+        ALARM_CHARGER_REQ (84),
+        ALARM_CHARGER_RES (85),
+        ETHSYNC_REQ (86),
+        ETHSYNC_RES (87),
+        UPDATE_OK (88),
+        TEST_MODE_REQ (89),
+        TEST_MODE_RES (90),
+        HISTORYMESG_REQ (91),
+        HISTORYMESG_RES (92),
+        AC_LOWTHRES_REQ (93),
+        AC_LOWTHRES_RES (94),
+        AC_UNDERTHRES_REQ (95),
+        AC_UNDERTHRES_RES (96),
+        AC_HITHRES_REQ    (97),
+        AC_HITHRES_RES    (98),
+        BATT_TESTVOLT_REQ (99),
+        BATT_TESTVOLT_RES (100),
+        BATT_TESTDUR_REQ (101),
+        BATT_TESTDUR_RES (102),
+        TEST_ENDCAP_REQ (103),
+        TEST_ENDCAP_RES (104),
+        TIME_TESTEN_REQ (105),
+        TIME_TESTEN_RES (106),
+
+        TEST1_MONTH_REQ (107),
+        TEST1_MONTH_RES (108),
+        TEST1_DAY_REQ   (109),
+        TEST1_DAY_RES   (110),
+        TEST1_HOUR_REQ  (111),
+        TEST1_HOUR_RES  (112),
+
+        TEST2_MONTH_REQ (113),
+        TEST2_MONTH_RES (114),
+        TEST2_DAY_REQ   (115),
+        TEST2_DAY_RES   (116),
+        TEST2_HOUR_REQ  (117),
+        TEST2_HOUR_RES  (118),
+
+        TEST3_MONTH_REQ (119),
+        TEST3_MONTH_RES (120),
+        TEST3_DAY_REQ   (121),
+        TEST3_DAY_RES   (122),
+        TEST3_HOUR_REQ  (123),
+        TEST3_HOUR_RES  (124),
+
+        TEST4_MONTH_REQ (125),
+        TEST4_MONTH_RES (126),
+        TEST4_DAY_REQ   (127),
+        TEST4_DAY_RES   (128),
+        TEST4_HOUR_REQ  (129),
+        TEST4_HOUR_RES  (130),
+        SYS_TIME_REQ    (131),
+        SYS_TIME_RES    (132),
+        CALIB_MESG1a    (133),
+        CALIB_MESG2a    (134),
+        CALIB_MESG3a    (135),
+        CALIB_MESG4a    (136),
+        WRITE_FLASH     (137)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { Cnt 6 }
+
+RS232_ReInit_Enable	OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { Cnt 7 }
+
+EMERV21_State  OBJECT-TYPE
+	SYNTAX     Integer32 {
+		TIMEINFO_REQ (0),
+        TIMEINFO_RES (1),
+        MANUFACTURERINFO_REQ (2),
+        MANUFACTURERINFO_RES (3),
+        COMMONPARA_REQ (4),
+        COMMONPARA_RES (5),
+        ALARMLEVEL_REQ (6),
+        ALARMLEVEL_RES (7),
+
+        ACINPUTINFO_REQ (8),
+        ACINPUTINFO_RES (9),
+        ACALARM_REQ (10),
+        ACALARM_RES (11),
+        ACPARAMETER_REQ (12),
+        ACPARAMETER_RES (13),
+
+        RECTSTSZTE_REQ (14),
+        RECTSTSZTE_RES (15),
+        RECTINFOZTE_REQ (16),
+        RECTINFOZTE_RES (17),
+        RECTALARM_REQ (18),
+        RECTALARM_RES (19),
+        RECTREMOTECTL_REQ (20),
+        RECTREMOTECTL_RES (21),
+
+        DCOUTPUT_REQ (22),
+        DCOUTPUT_RES (23),
+        DCALARM_REQ (24),
+        DCALARM_RES (25),
+        DCPARAMETER_REQ (26),
+        DCPARAMETER_RES (27),
+        ENVDATA_REQ (28),
+        ENVDATA_RES (29),
+        ENVALARM_REQ (30),
+        ENVALARM_RES (31),
+		
+		SYSINFO_REQ  (32),
+        SYSINFO_RES  (33),
+        RECTINFO_REQ (34),
+        RECTINFO_RES (35),
+        ACINFO_REQ   (36),
+        ACINFO_RES   (37),
+        ALARM_DC_REQ (38),
+        ALARM_DC_RES (39),
+        ALARM_RECT_REQ (40),
+        ALARM_RECT_RES (41),
+        ALARM_AC_REQ   (42),
+        ALARM_AC_RES   (43),
+        ALARM_MAN_REQ  (44),
+        ALARM_MAN_RES  (45),
+        BATT_FLOATVOLTAGE_REQ (46),
+        BATT_FLOATVOLTAGE_RES (47),
+        BATT_BOOSTVOLTAGE_REQ (48),
+        BATT_BOOSTVOLTAGE_RES (49),
+        BATT_TEMPCOMPEN_REQ   (50),
+        BATT_TEMPCOMPEN_RES   (51),
+        BATT_LLVDEN_REQ  (52),
+        BATT_LLVDEN_RES  (53),
+        BATT_BLVDEN_REQ  (54),
+        BATT_BLVDEN_RES  (55),
+        BATT_LLVD_REQ    (56),
+        BATT_LLVD_RES    (57),
+        BATT_BLVD_REQ    (58),
+        BATT_BLVD_RES    (59),
+        BATT_DCLOW_REQ   (60),
+        BATT_DCLOW_RES   (61),
+        BATT_DCUNDER_REQ (62),
+        BATT_DCUNDER_RES (63),
+        BATT_DCOVER_REQ  (64),
+        BATT_DCOVER_RES  (65),
+        BATT_STRING_REQ  (66),
+        BATT_STRING_RES  (67),
+        BATT_STDCAP_REQ  (68),
+        BATT_STDCAP_RES  (69),
+        BATT_CURRLIMIT_REQ  (70),
+        BATT_CURRLIMIT_RES  (71),
+        BATT_HIGHTEMPALARM_REQ (72),
+        BATT_HIGHTEMPALARM_RES (73),
+        BATT_OVERTEMPALARM_REQ (74),
+        BATT_OVERTEMPALARM_RES (75),
+        SYS_WALKINTIMEDUR_REQ  (76),
+        SYS_WALKINTIMEDUR_RES  (77),
+        SYS_WALKINTIMEEN_REQ   (78),
+        SYS_WALKINTIMEEN_RES   (79),
+        ATSINFO_REQ (80),
+        ATSINFO_RES (81),
+        CHARGERINFO_REQ (82),
+        CHARGERINFO_RES (83),
+        ALARM_CHARGER_REQ (84),
+        ALARM_CHARGER_RES (85),
+        ETHSYNC_REQ (86),
+        ETHSYNC_RES (87),
+        UPDATE_OK (88),
+        TEST_MODE_REQ (89),
+        TEST_MODE_RES (90),
+        HISTORYMESG_REQ (91),
+        HISTORYMESG_RES (92),
+        AC_LOWTHRES_REQ (93),
+        AC_LOWTHRES_RES (94),
+        AC_UNDERTHRES_REQ (95),
+        AC_UNDERTHRES_RES (96),
+        AC_HITHRES_REQ    (97),
+        AC_HITHRES_RES    (98),
+        BATT_TESTVOLT_REQ (99),
+        BATT_TESTVOLT_RES (100),
+        BATT_TESTDUR_REQ (101),
+        BATT_TESTDUR_RES (102),
+        TEST_ENDCAP_REQ (103),
+        TEST_ENDCAP_RES (104),
+        TIME_TESTEN_REQ (105),
+        TIME_TESTEN_RES (106),
+
+        TEST1_MONTH_REQ (107),
+        TEST1_MONTH_RES (108),
+        TEST1_DAY_REQ   (109),
+        TEST1_DAY_RES   (110),
+        TEST1_HOUR_REQ  (111),
+        TEST1_HOUR_RES  (112),
+
+        TEST2_MONTH_REQ (113),
+        TEST2_MONTH_RES (114),
+        TEST2_DAY_REQ   (115),
+        TEST2_DAY_RES   (116),
+        TEST2_HOUR_REQ  (117),
+        TEST2_HOUR_RES  (118),
+
+        TEST3_MONTH_REQ (119),
+        TEST3_MONTH_RES (120),
+        TEST3_DAY_REQ   (121),
+        TEST3_DAY_RES   (122),
+        TEST3_HOUR_REQ  (123),
+        TEST3_HOUR_RES  (124),
+
+        TEST4_MONTH_REQ (125),
+        TEST4_MONTH_RES (126),
+        TEST4_DAY_REQ   (127),
+        TEST4_DAY_RES   (128),
+        TEST4_HOUR_REQ  (129),
+        TEST4_HOUR_RES  (130),
+        SYS_TIME_REQ    (131),
+        SYS_TIME_RES    (132),
+        CALIB_MESG1a    (133),
+        CALIB_MESG2a    (134),
+        CALIB_MESG3a    (135),
+        CALIB_MESG4a    (136),
+        WRITE_FLASH     (137)	
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { Cnt 8 }
+
+ZTE_State  OBJECT-TYPE
+	SYNTAX     Integer32{
+		TIMEINFO_REQ (0),
+        TIMEINFO_RES (1),
+        MANUFACTURERINFO_REQ (2),
+        MANUFACTURERINFO_RES (3),
+        COMMONPARA_REQ (4),
+        COMMONPARA_RES (5),
+        ALARMLEVEL_REQ (6),
+        ALARMLEVEL_RES (7),
+
+        ACINPUTINFO_REQ (8),
+        ACINPUTINFO_RES (9),
+        ACALARM_REQ (10),
+        ACALARM_RES (11),
+        ACPARAMETER_REQ (12),
+        ACPARAMETER_RES (13),
+
+        RECTSTSZTE_REQ (14),
+        RECTSTSZTE_RES (15),
+        RECTINFOZTE_REQ (16),
+        RECTINFOZTE_RES (17),
+        RECTALARM_REQ (18),
+        RECTALARM_RES (19),
+        RECTREMOTECTL_REQ (20),
+        RECTREMOTECTL_RES (21),
+
+        DCOUTPUT_REQ (22),
+        DCOUTPUT_RES (23),
+        DCALARM_REQ (24),
+        DCALARM_RES (25),
+        DCPARAMETER_REQ (26),
+        DCPARAMETER_RES (27),
+        ENVDATA_REQ (28),
+        ENVDATA_RES (29),
+        ENVALARM_REQ (30),
+        ENVALARM_RES (31)
+	}
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { Cnt 9 }
+
+HW_State  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { Cnt 10 }
+
+HW_Rs485_Cmd  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { Cnt 11 }
+
+-- fan dcp info===============================================================
+dpc_fan_env_temp  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { fandpcInfo 1 }
+
+dpc_fan_airflow_temp  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { fandpcInfo 2 }
+
+dpc_fan_voltage  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { fandpcInfo 3 }
+
+dpc_fan_working_current  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { fandpcInfo 4 }
+
+dpc_fan_state_device  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { fandpcInfo 5 }
+
+dpc_fan_state_fan  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { fandpcInfo 6 }
+
+dpc_fan_alarm_fail_refrigeration  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { fandpcInfo 7 }
+
+dpc_fan_alarm_high_temp  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { fandpcInfo 8 }
+
+dpc_fan_alarm_low_temp  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { fandpcInfo 9 }
+
+dpc_fan_alarm_fail_sensor_temp  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { fandpcInfo 10 }
+
+dpc_fan_alarm_high_voltage  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { fandpcInfo 11 }
+
+dpc_fan_alarm_low_voltage  OBJECT-TYPE
+	SYNTAX     Integer32
+	MAX-ACCESS read-only
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { fandpcInfo 12 }
+
+dpc_fan_para_dc_starting_point	OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { fandpcInfo 13 }
+
+dpc_fan_para_dc_sensivive_point	OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { fandpcInfo 14 }
+
+dpc_fan_para_alarm_high_temp	OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { fandpcInfo 15 }
+
+dpc_fan_para_alarm_low_temp	OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { fandpcInfo 16 }
+
+dpc_fan_para_dc_heating_start_point	OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { fandpcInfo 17 }
+
+dpc_fan_para_dc_heating_sensitive_point	OBJECT-TYPE
+	SYNTAX     Integer32 
+	MAX-ACCESS read-write
+	STATUS     current
+	DESCRIPTION
+		""
+	::= { fandpcInfo 18 }
+
+--trap========================================================================
+dcSystemDAQV2KTraps  NOTIFICATION-GROUP
+	NOTIFICATIONS { 
+		alarmMajorBatteryHighTempTrap, 
+		alarmLLVDTrap, 
+		alarmBLVDTrap, 
+		alarmDCLowTrap, 
+		alarmACmainsTrap, 
+		alarmBatteryBreakerOpenTrap, 
+		alarmDistributionBreakerOpenTrap, 
+		alarmRectifierFaultTrap, 
+		alarmRectifierNoRespTrap,
+		alarmManualModeActivatedTrap,
+		alarmACLowTrap,		
+		alarmSmokeTrap,		
+		alarmEnvDoorTrap,	
+		alarmLiBTrap,	
+		alarmGenTrap,	
+		alarmBMTrap,
+		alarmVACTrap,
+		alarmSMCBTrap,
+		alarmFrequencyTrap,
+		alarmLiBConnect,
+		alarmPMUConnect,
+		alarmGenConnect,
+		alarmBMConnect,
+		alarmPMConnect,
+		alarmVACConnect,
+		alarmSMCBConnect,
+		alarmFUELConnect,
+		alarmISENSEConnect,
+		alarm_pm_dc_Connect,
+		alarm_dpc_fan_Connect,
+		alarmDigitalInput1Trap,
+		alarmDigitalInput2Trap,
+		alarmDigitalInput3Trap,
+		alarmDigitalInput4Trap,
+		alarmDigitalInput5Trap,
+		alarmDigitalInput6Trap,
+		alarmDigitalInput7Trap,
+		alarmDigitalInput8Trap,
+		alarmNewFirmwareTrap
+		}
+	STATUS     current
+	DESCRIPTION 
+		" This branch contains the Alarm Notification Traps, which duplicate the alarmGroup OIDs.
+		       Each alarm condition is represented by a Alarm Condition Trap and an associated OFF
+		       Trap, which is optionally transmitted according to the state of  OID systemSendOffTrap"
+	::= { viettelPowerPlantDAQV2K 20 }
+
+alarmMajorBatteryHighTempTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmMajorBatteryHighTemp, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The Major High Battery Temperature alarm."
+	::= { dcSystemDAQV2KTraps 1 }
+
+alarmLLVDTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmLLVD, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The load Contactor 1 alarm. The contactor disconnect voltage has been
+		reached and the contactor has disconnected."
+	::= { dcSystemDAQV2KTraps 2 }
+
+alarmBLVDTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmBLVD, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The load Contactor 2 alarm. The contactor disconnect voltage has been
+		reached and the contactor has disconnected."
+	::= { dcSystemDAQV2KTraps 3 }
+
+alarmDCLowTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmDCLow, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The load Contactor 3 alarm. The contactor disconnect voltage has been
+		reached and the contactor has disconnected."
+	::= { dcSystemDAQV2KTraps 4 }
+
+alarmACmainsTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmACmains, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The AC voltage has dropped below critical level, or one or more AC input phases was lost."
+	::= { dcSystemDAQV2KTraps 5 }
+
+alarmBatteryBreakerOpenTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmBatteryBreakerOpen, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"A battery breaker/fuse alarm."
+	::= { dcSystemDAQV2KTraps 6 }
+
+alarmDistributionBreakerOpenTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmDistributionBreakerOpen, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"A Load Distribution breaker/fuse alarm."
+	::= { dcSystemDAQV2KTraps 7 }
+
+alarmRectifierFaultTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmRectifierFault, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"This indicates that Rectifier has Fault alarm."
+	::= { dcSystemDAQV2KTraps 8 }
+
+alarmRectifierNoRespTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmRectifierNoResp, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"This indicates that Rectifier is not responding."
+	::= { dcSystemDAQV2KTraps 9 }
+	
+alarmManualModeActivatedTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmManualModeActivated, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"This is Manual Mode alarm."
+	::= { dcSystemDAQV2KTraps 10 }	
+	
+alarmACLowTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmACLow, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The AC Low alarm."
+	::= { dcSystemDAQV2KTraps 11 }	
+	
+alarmSmokeTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmSmoke, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The Smoke alarm."
+	::= { dcSystemDAQV2KTraps 12 }	
+	
+alarmEnvDoorTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmEnvDoor, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The Door Open alarm."
+	::= { dcSystemDAQV2KTraps 13 }	
+	
+alarmLiBTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmLiB, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The alarmLiBTrap alarm."
+	::= { dcSystemDAQV2KTraps 14 }	
+	
+alarmGenTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmGen, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The alarmGenTrap alarm."
+	::= { dcSystemDAQV2KTraps 15 }	
+	
+alarmBMTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmBM, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The alarmBMTrap alarm."
+	::= { dcSystemDAQV2KTraps 16 }
+	
+alarmVACTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmVAC, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The alarmVACTrap alarm."
+	::= { dcSystemDAQV2KTraps 17 }
+	
+alarmSMCBTrap  NOTIFICATION-TYPE
+	OBJECTS { smcbState, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The alarmSMCBTrap alarm."
+	::= { dcSystemDAQV2KTraps 18 }
+	
+alarmFrequencyTrap  NOTIFICATION-TYPE
+	OBJECTS { pmFrequency, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The alarmFrequencyTrap alarm."
+	::= { dcSystemDAQV2KTraps 19 }
+
+
+
+alarmLiBConnectTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmLiBConnect, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The alarmLiBConnect alarm."
+	::= { dcSystemDAQV2KTraps 151 }
+
+alarmPMUConnectTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmPMUConnect, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The alarmPMUConnect trap."
+	::= { dcSystemDAQV2KTraps 152 }
+
+alarmGenConnectTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmGenConnect, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The alarmGenConnect trap."
+	::= { dcSystemDAQV2KTraps 153 }
+
+alarmBMConnectTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmBMConnect, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The alarmBMConnect trap."
+	::= { dcSystemDAQV2KTraps 154 }
+
+alarmPMConnectTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmPMConnect, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The alarmPMConnect trap."
+	::= { dcSystemDAQV2KTraps 155 }
+
+alarmVACConnectTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmVACConnect, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The alarmVACConnect trap."
+	::= { dcSystemDAQV2KTraps 156 }
+	
+alarmSMCBConnectTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmSMCBConnect, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The alarmSMCBConnect trap."
+	::= { dcSystemDAQV2KTraps 157 }
+		
+alarmFUELConnectTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmFUELConnect, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The alarmFUELConnect trap."
+	::= { dcSystemDAQV2KTraps 158 }
+
+alarmISENSEConnectTrap  NOTIFICATION-TYPE
+	OBJECTS { alarmISENSEConnect, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The alarmISENSEConnect trap."
+	::= { dcSystemDAQV2KTraps 159 }
+
+alarm_pm_dc_ConnectTrap  NOTIFICATION-TYPE
+	OBJECTS { alarm_pm_dc_Connect, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The alarm_pm_dc_Connect trap."
+	::= { dcSystemDAQV2KTraps 160 }
+
+alarm_dpc_fan_ConnectTrap  NOTIFICATION-TYPE
+	OBJECTS { alarm_dpc_fan_Connect, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"The alarm_dpc_fan_Connect trap."
+	::= { dcSystemDAQV2KTraps 161 }	
+		
+alarmDigitalInput1Trap  NOTIFICATION-TYPE
+	OBJECTS { alarmDigitalInput1, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"This is DigitalInput1 alarm."
+	::= { dcSystemDAQV2KTraps 101 }
+	
+alarmDigitalInput2Trap  NOTIFICATION-TYPE
+	OBJECTS { alarmDigitalInput2, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"This is DigitalInput2 alarm."
+	::= { dcSystemDAQV2KTraps 102 }
+	
+alarmDigitalInput3Trap  NOTIFICATION-TYPE
+	OBJECTS { alarmDigitalInput3, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"This is DigitalInput3 alarm."
+	::= { dcSystemDAQV2KTraps 103 }
+	
+alarmDigitalInput4Trap  NOTIFICATION-TYPE
+	OBJECTS { alarmDigitalInput4, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"This is DigitalInput4 alarm."
+	::= { dcSystemDAQV2KTraps 104 }
+	
+alarmDigitalInput5Trap  NOTIFICATION-TYPE
+	OBJECTS { alarmDigitalInput5, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"This is DigitalInput5 alarm."
+	::= { dcSystemDAQV2KTraps 105 }
+	
+alarmDigitalInput6Trap  NOTIFICATION-TYPE
+	OBJECTS { alarmDigitalInput6, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"This is DigitalInput6 alarm."
+	::= { dcSystemDAQV2KTraps 106 }
+	
+alarmDigitalInput7Trap  NOTIFICATION-TYPE
+	OBJECTS { alarmDigitalInput7, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"This is DigitalInput7 alarm."
+	::= { dcSystemDAQV2KTraps 107 }
+	
+alarmDigitalInput8Trap  NOTIFICATION-TYPE
+	OBJECTS { alarmDigitalInput8, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		"This is DigitalInput8 alarm."
+	::= { dcSystemDAQV2KTraps 108 }
+	
+alarmNewFirmwareTrap  NOTIFICATION-TYPE
+	OBJECTS { siteCRCStr, 
+		siteInfoTrapCounter }
+	STATUS     current
+	DESCRIPTION 
+		""
+	::= { dcSystemDAQV2KTraps 109 }
+	
+END
+
+-- This MIB was created using NuDesign Team's Visual MIBuilder (Ver 4.4).
+

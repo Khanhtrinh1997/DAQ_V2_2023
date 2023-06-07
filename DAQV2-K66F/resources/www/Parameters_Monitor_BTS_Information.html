@@ -1,0 +1,87 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<link rel="stylesheet" href="./css/status.css" type="text/css"> 
+		<script type="text/javascript" src="./js/util.js"></script>
+		<script type="text/javascript" src="./js/constant.js"></script>
+		<script type="text/javascript" src="./js/tabdes.js"></script>
+		<script type="text/javascript" src="./js/jsdiff.js"></script>
+		<script type="text/javascript" src="./js/param_bts_info.js"></script>
+		<script type="text/javascript">
+			document.write("<title>"+LanguageUI["V_STAT_dhcpWebtitle"]+"</title>") ;
+			// Session Key
+			var vBtsName = 0;
+			var vBtsDCVendor = 0;
+			var vBtsCModel = 0;
+			var vBtsRectType = 0;
+			var vBtsAmbTemp = 0;
+			var vCabCtrlType = 0;
+			
+		</script>
+	</head>
+	<body onload="LoadFrame()" class="mainbody">
+		<div style="overflow-x:hidden; overflow-y:auto; WIDTH: 100%; HEIGHT: 460px">
+			<form id="ConfigForm">
+				<!-- INTRODUCTION TEXT -->
+				<table class="width_100p" id="tabTest" border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td class="prompt">
+							<table class="width_100p" border="0" cellpadding="0" cellspacing="0">
+								<tbody>
+									<tr>
+										<td class="title_common" BindText="V_STAT_btsInfoTitleIntro"></td>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+						<tr>
+							<td class="height5p"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="tabal_bg width_100p" id="dhcpinfo" align="center" border="0" cellpadding="0" cellspacing="1">
+					<tbody>				
+						<!-- BTS NAME -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_btsName" ></td>
+							<td class="tabal_right width_65p" id="idbts_Name"></td>							
+						</tr>
+						<!-- BTS DCSYSTEM VENDOR -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_btsDCSysVendor"></td>
+							<td class="tabal_right width_65p" id="idbts_DCSysVendor"></td>							
+						</tr>
+						<!-- BTS CONTROLLER MODEL -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_btsControllerModel"></td>
+							<td class="tabal_right width_65p " id="idbts_ControllerModel"></td>							
+						</tr>		
+						<!-- BTS RECT TYPE -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_btsRectType"></td>
+							<td class="tabal_right width_65p" id="idbts_RectType"></td>							
+						</tr>
+						<!-- BTS AMBIENT TEMP -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_btsAmbientTemp"></td>
+							<td class="tabal_right width_65p" id="idbts_AmbientTemp"></td>	
+						</tr>							
+					</tbody>
+				</table>
+
+				<table>
+					<tr>
+						<td height="5px"></td>
+					</tr>
+				</table>
+
+			</form>
+
+		</div>
+
+	</body>
+</html>

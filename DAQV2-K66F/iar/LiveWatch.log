@@ -1,0 +1,35 @@
+Expression	Value	Location	Type	
+sysCountTest	247	0x20016A98	uint32_t	
+masterRxData	<array>""	0x20016B9C	uint8_t[1024]	
+masterTxData	<array>""	0x20016A9C	uint8_t[256]	
+netInterface[0]	<struct>	0x200170C4	struct _NetInterface	
+MESGState	BATT_LLVD_REQ	0x2001A108	tMESGState	
+sBattInfo.sRAWBattInfo	<struct>	0x20019BA0	tRAWBattInfo	
+settingCommand	0x00000000	0x200196A8	uint32_t	
+setCmd_mask	0x00000000	0x200196A4	uint32_t	
+privateMibBase.configGroup	<struct>	0x20017968	struct <Unnamed 663>	
+sBattTestInfo.u8CheckSentAll	'\0' (0x00)	0x20019F33	uint8_t	
+pageToWrite	0	0x20016F9C	uint32_t	
+byteToWrite	0	0x20016FA0	uint32_t	
+rw_flag	'.' (0x05)	0x2001A10A	uint8_t	
+buttonPush	'.' (0x01)	0x2001A10B	uint8_t	
+sFirmwarePackage	<struct>	0x20019F60	tFirmwarePackage	
+totalByteToWrite	0	0x20016FA4	uint32_t	
+privateMibBase.siteGroup.siteNetworkInfo	<struct>	0x200176B0	struct <Unnamed 653>	
+netInterface[0].ipv4Context.addr	0x0901A8C0	0x20017244	Ipv4Addr	
+g_sWorkingDefaultParameters	<struct>	0x200049B4	tConfigParameters	
+ucSequenceNum	'\0' (0x00)	0x200049B4	unsigned char	
+ucCRC	'\0' (0x00)	0x200049B5	unsigned char	
+ucVersion	'\0' (0x00)	0x200049B6	unsigned char	
+ucFlags	'€' (0x80)	0x200049B7	unsigned char	
+ucReserved1	<array>""	0x200049B8	unsigned char[2]	
+sPort	<array>	0x200049BC	tPortParameters[2]	
+siteName	<array>"Viettel Power System Monitor"	0x20004A14	unsigned char[40]	
+u32StaticIP	3232235786	0x20004A3C	uint32_t	
+u32GatewayIP	3232235777	0x20004A40	uint32_t	
+u32SubnetMask	4294967040	0x20004A44	uint32_t	
+u32SnmpIP	3232235788	0x20004A48	uint32_t	
+u32TrapPeriod	5	0x20004A4C	uint32_t	
+u8TrapMode	'\0' (0x00)	0x20004A50	uint8_t	
+u8FirmVer	'Ü' (0xDC)	0x20004A51	uint8_t	
+u32Reserved2	<array>	0x20004A54	uint32_t[26]	

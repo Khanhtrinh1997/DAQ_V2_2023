@@ -1,0 +1,108 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<link rel="stylesheet" href="./css/status.css" type="text/css">
+		<script type="text/javascript" src="./js/util.js"></script>
+		<script type="text/javascript" src="./js/constant.js"></script>
+		<script type="text/javascript" src="./js/tabdes.js"></script>
+		<script type="text/javascript" src="./js/jsdiff.js"></script>
+		<script type="text/javascript" src="./js/param_vac_setup.js"></script>
+		<script type="text/javascript">
+			document.write("<title>"+LanguageUI["V_STAT_dhcpWebtitle"]+"</title>") ;
+			// Session Key
+		
+		</script>
+	</head>
+	<body onload="LoadFrame()" class="mainbody">
+		<div style="overflow-x:hidden; overflow-y:auto; WIDTH: 100%; HEIGHT: 460px">
+			<form id="ConfigForm">
+				<!-- INTRODUCTION TEXT -->
+				<table class="width_100p" id="tabTest" border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td class="prompt">
+							<table class="width_100p" border="0" cellpadding="0" cellspacing="0">
+								<tbody>
+									<tr>
+										<td class="title_common" BindText="V_CONFIG_configInfoTitleIntro"></td>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+						<tr>
+							<td class="height5p"></td>
+						</tr>
+					</tbody>
+				</table>		
+				
+				<table class="tabal_bg width_100p" id="dhcpinfo" align="center" border="0" cellpadding="0" cellspacing="1">				
+					<tbody>	
+						<!-- Number Of VAC -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_CONFIG_vacTotalNo" ></td>
+							<td class="tabal_right width_25p  " id="idconfigvac_TotalNo"></td>
+							<td class="tabal_right width_35p ">
+							<select size="1" name="idliion_TotalNo" id="idvac_TotalNo">
+							<option value="0">0</option>
+							<option value="1">1</option></select></td>
+							<!-- <option value="2">2</option> -->
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fVACTotalNumSet()" name="Submit11" id="Submit11">
+						</tr>
+						<tr>
+							<td class="height5p"></td>
+						</tr>
+					</tbody>
+				</table>		
+				
+				<table class="tabal_bg width_100p" id="modeinfo" align="center" border="0" cellpadding="0" cellspacing="1">				
+					<tbody>		
+						<tr>
+							<td class="tabal_left width_5p" BindText="V_CONFIG_vacNo"></td>
+							<td class="tabal_left width_10p" BindText="V_CONFIG_vacCurrID"></td>
+							<td class="tabal_left width_15p" BindText="V_CONFIG_vacCurrVendor"></td>
+							<td class="tabal_left width_15p" BindText="V_CONFIG_vacSetVendor"></td>					
+							<td class="tabal_left width_10p"></td>							
+						<tr>						
+						<!-- VAC ID 1-->
+						<tr>
+							<td class="tabal_right width_5p " align="center">1</td>
+							<td class="tabal_right width_5p " align="center" id="idvac_ID1"></td>							
+							<td class="tabal_right width_15p " align="center" id="idvac_VD1"></td>
+							<td class="tabal_right width_15p ">
+							<select size="1" name="vacvd1" id="vacvd1">
+								<option value="0">None</option>
+								<option value="1">Viettel</option>
+							</select></td>							
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fVACID1Set()" name="Submit1" id="Submit1">
+							</td>								
+						<tr>	
+						<!-- VAC ID 2-->
+						<tr>
+							<td class="tabal_right width_5p " align="center">2</td>
+							<td class="tabal_right width_5p " align="center" id="idvac_ID2"></td>							
+							<td class="tabal_right width_15p " align="center" id="idvac_VD2"></td>
+							<td class="tabal_right width_15p ">
+							<select size="1" name="vacvd2" id="vacvd2">
+								<option value="0">None</option>
+								<option value="1">Viettel</option>
+							</select></td>							
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fVACID2Set()" name="Submit2" id="Submit2">
+							</td>								
+						<tr>	
+					</tbody>
+				</table>
+
+				<table>
+					<tr>
+						<td height="5px"></td>
+					</tr>
+				</table>
+				
+			</form>
+
+		</div>
+
+	</body>
+</html>

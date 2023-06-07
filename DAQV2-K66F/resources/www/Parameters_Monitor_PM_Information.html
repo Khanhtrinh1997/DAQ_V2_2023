@@ -1,0 +1,180 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<link rel="stylesheet" href="./css/status.css" type="text/css"> 
+		<script type="text/javascript" src="./js/util.js"></script>
+		<script type="text/javascript" src="./js/constant.js"></script>
+		<script type="text/javascript" src="./js/tabdes.js"></script>
+		<script type="text/javascript" src="./js/jsdiff.js"></script>
+		<script type="text/javascript" src="./js/param_pm_info.js"></script>
+		<script type="text/javascript">
+			document.write("<title>"+LanguageUI["V_STAT_dhcpWebtitle"]+"</title>") ;
+			// Session Key
+			var vPMInstalledPM = 0;
+			var vPMRunningPM = 0;
+			var vPMModel = 0;
+			var vPMSerialNumber = 0;	
+			var vPMVoltage = 0;	
+			var vPMCurr = 0;	
+			var vPMFreq = 0;	
+			var vPMPF = 0;	
+			var vPMActivePower = 0;	
+			var vPMReactivePower = 0;	
+			var vPMActiveEnergy = 0;	
+			var vPMReactiveEnergy = 0;				
+			
+		</script>
+	</head>
+	<body onload="LoadFrame()" class="mainbody">
+		<div style="overflow-x:hidden; overflow-y:auto; WIDTH: 100%; HEIGHT: 460px">
+			<form id="ConfigForm">
+				<!-- INTRODUCTION TEXT -->
+				<table class="width_100p" id="tabTest" border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td class="prompt">
+							<table class="width_100p" border="0" cellpadding="0" cellspacing="0">
+								<tbody>
+									<tr>
+										<td class="title_common" BindText="V_STAT_pmInfoTitleIntro"></td>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+						<tr>
+							<td class="height5p"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="tabal_bg width_100p" id="dhcpinfo" align="center" border="0" cellpadding="0" cellspacing="1">
+					<tbody>								
+						<!-- PM CONNECT STATUS -->
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_STAT_pmConnect" ></td>
+							<td class="tabal_right width_25p" id="idpm_Connect"></td>	
+							<td class="tabal_left width_25p"  ></td>
+							<td class="tabal_right width_25p" ></td>								
+						</tr>					
+						<!-- PM INSTALLED PM --><!-- PM RUNNING PM -->
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_STAT_pmInstalledPM" ></td>
+							<td class="tabal_right width_25p" id="idpm_InstalledPM"></td>		
+							<td class="tabal_left width_25p" BindText="V_STAT_pmRunningPM"></td>
+							<td class="tabal_right width_25p" id="idpm_RunningPM"></td>							
+						</tr>
+						<!-- PM MODEL --><!-- PM SERIAL NUMBER -->	
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_STAT_pmModel"></td>
+							<td class="tabal_right width_25p " id="idpm_Model"></td>
+							<td class="tabal_left width_25p" BindText="V_STAT_pmSerialNumber"></td>
+							<td class="tabal_right width_25p" id="idpm_SerialNumber"></td>							
+						</tr>
+						<!-- PM CURRENT -->
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_STAT_pmCurr"></td>
+							<td class="tabal_right width_25p" id="idpm_TotalCurr"></td>	
+							<td class="tabal_left width_25p" ></td>
+							<td class="tabal_right width_25p" ></td>						
+						</tr>
+						<!-- PM FREQUENCY --><!-- PM PF -->
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_STAT_pmFreq"></td>
+							<td class="tabal_right width_25p" id="idpm_Freq"></td>			
+							<td class="tabal_left width_25p" BindText="V_STAT_pmPF"></td>
+							<td class="tabal_right width_25p" id="idpm_PF"></td>							
+						</tr>
+						<!-- PM ACTIVE POWER --><!-- PM REACTIVE POWER -->							
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_STAT_pmActivePower"></td>
+							<td class="tabal_right width_25p" id="idpm_ActivePower"></td>	
+							<td class="tabal_left width_25p" BindText="V_STAT_pmReactivePower"></td>
+							<td class="tabal_right width_25p" id="idpm_ReactivePower"></td>		
+						</tr>
+						<!-- PM ACTIVE ENERGY --><!-- PM REACTIVE ENERGY -->						
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_STAT_pmActiveEnergy"></td>
+							<td class="tabal_right width_25p" id="idpm_ActiveEnergy"></td>	
+							<td class="tabal_left width_25p" BindText="V_STAT_pmReactiveEnergy"></td>
+							<td class="tabal_right width_25p" id="idpm_ReactiveEnergy"></td>		
+						</tr>		
+						<!-- PM VOLT1 -->					
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_STAT_pmVoltage1"></td>
+							<td class="tabal_right width_25p" id="idpm_Voltage1"></td>	
+							<td class="tabal_left width_25p" ></td>
+							<td class="tabal_right width_25p" ></td>		
+						</tr>	
+						<!-- PM CURR1 -->	<!-- PM PF1 -->				
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_STAT_pmCurr1"></td>
+							<td class="tabal_right width_25p" id="idpm_Curr1"></td>	
+							<td class="tabal_left width_25p" BindText="V_STAT_pmPF1"></td>
+							<td class="tabal_right width_25p" id="idpm_PF1"></td>		
+						</tr>	
+						<!-- PM CURR1 -->	<!-- PM PF1 -->				
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_STAT_pmActivePower1"></td>
+							<td class="tabal_right width_25p" id="idpm_ActivePower1"></td>	
+							<td class="tabal_left width_25p" BindText="V_STAT_pmReactivePower1"></td>
+							<td class="tabal_right width_25p" id="idpm_ReactivePower1"></td>		
+						</tr>		
+						<!-- PM VOLT2 -->					
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_STAT_pmVoltage2"></td>
+							<td class="tabal_right width_25p" id="idpm_Voltage2"></td>	
+							<td class="tabal_left width_25p" ></td>
+							<td class="tabal_right width_25p" ></td>		
+						</tr>	
+						<!-- PM CURR2 -->	<!-- PM PF2 -->				
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_STAT_pmCurr2"></td>
+							<td class="tabal_right width_25p" id="idpm_Curr2"></td>	
+							<td class="tabal_left width_25p" BindText="V_STAT_pmPF2"></td>
+							<td class="tabal_right width_25p" id="idpm_PF2"></td>		
+						</tr>	
+						<!-- PM CURR2 -->	<!-- PM PF2 -->				
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_STAT_pmActivePower2"></td>
+							<td class="tabal_right width_25p" id="idpm_ActivePower2"></td>	
+							<td class="tabal_left width_25p" BindText="V_STAT_pmReactivePower2"></td>
+							<td class="tabal_right width_25p" id="idpm_ReactivePower2"></td>		
+						</tr>		
+						<!-- PM VOLT3 -->					
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_STAT_pmVoltage3"></td>
+							<td class="tabal_right width_25p" id="idpm_Voltage3"></td>	
+							<td class="tabal_left width_25p" ></td>
+							<td class="tabal_right width_25p" ></td>		
+						</tr>	
+						<!-- PM CURR3 -->	<!-- PM PF3 -->				
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_STAT_pmCurr3"></td>
+							<td class="tabal_right width_25p" id="idpm_Curr3"></td>	
+							<td class="tabal_left width_25p" BindText="V_STAT_pmPF3"></td>
+							<td class="tabal_right width_25p" id="idpm_PF3"></td>		
+						</tr>	
+						<!-- PM CURR3 -->	<!-- PM PF3 -->				
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_STAT_pmActivePower3"></td>
+							<td class="tabal_right width_25p" id="idpm_ActivePower3"></td>	
+							<td class="tabal_left width_25p" BindText="V_STAT_pmReactivePower3"></td>
+							<td class="tabal_right width_25p" id="idpm_ReactivePower3"></td>		
+						</tr>							
+					</tbody>
+				</table>
+
+				<table>
+					<tr>
+						<td height="5px"></td>
+					</tr>
+				</table>
+
+			</form>
+
+		</div>
+
+	</body>
+</html>

@@ -1,0 +1,126 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<link rel="stylesheet" href="./css/status.css" type="text/css"> 
+		<script type="text/javascript" src="./js/util.js"></script>
+		<script type="text/javascript" src="./js/constant.js"></script>
+		<script type="text/javascript" src="./js/tabdes.js"></script>
+		<script type="text/javascript" src="./js/jsdiff.js"></script>
+		<script type="text/javascript" src="./js/param_batt_info.js"></script>
+		<script type="text/javascript">
+			document.write("<title>"+LanguageUI["V_STAT_dhcpWebtitle"]+"</title>") ;
+			// Session Key
+			var vBattVolt = 0;
+			var vBattCurr = 0;
+			var vBattTemp = 0;
+			var vBattNum = 0;	
+			var vBattCB1 = 0;	
+			var vBattCB2 = 0;	
+			var vBattCB3 = 0;	
+			var vBattCB4 = 0;	
+			var vBatt1RmnCap = 0;	
+			var vBatt2RmnCap = 0;				
+			
+		</script>
+	</head>
+	<body onload="LoadFrame()" class="mainbody">
+		<div style="overflow-x:hidden; overflow-y:auto; WIDTH: 100%; HEIGHT: 460px">
+			<form id="ConfigForm">
+				<!-- INTRODUCTION TEXT -->
+				<table class="width_100p" id="tabTest" border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td class="prompt">
+							<table class="width_100p" border="0" cellpadding="0" cellspacing="0">
+								<tbody>
+									<tr>
+										<td class="title_common" BindText="V_STAT_battInfoTitleIntro"></td>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+						<tr>
+							<td class="height5p"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="tabal_bg width_100p" id="dhcpinfo" align="center" border="0" cellpadding="0" cellspacing="1">
+					<tbody>						
+						<!-- BATTERY VOLTAGE -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_battVolt" ></td>
+							<td class="tabal_right width_65p" id="idbatt_Volt"></td>							
+						</tr>
+						<!-- BATTERY CURRENT -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_battCurr"></td>
+							<td class="tabal_right width_65p" id="idbatt_Curr"></td>							
+						</tr>
+						<!-- BATTERY TEMPERATURE -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_battTemp"></td>
+							<td class="tabal_right width_65p " id="idbatt_Temp"></td>							
+						</tr>		
+						<!-- BATTERY STRING NUMBER -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_battNum"></td>
+							<td class="tabal_right width_65p" id="idbatt_Num"></td>							
+						</tr>
+						<!-- BATTERY1 REMAINING CAPACITY -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_batt1rmnCap"></td>
+							<td class="tabal_right width_65p" id="idbatt_1rmnCap"></td>							
+						</tr>
+						<!-- BATTERY2 REMAINING CAPACITY -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_batt2rmnCap"></td>
+							<td class="tabal_right width_65p" id="idbatt_2rmnCap"></td>							
+						</tr>
+						<!-- BATTERY3 REMAINING CAPACITY -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_batt3rmnCap"></td>
+							<td class="tabal_right width_65p" id="idbatt_3rmnCap"></td>							
+						</tr>
+						<!-- BATTERY4 REMAINING CAPACITY -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_batt4rmnCap"></td>
+							<td class="tabal_right width_65p" id="idbatt_4rmnCap"></td>							
+						</tr>
+						<!-- BATTERY CB1 -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_battCB1"></td>
+							<td class="tabal_right width_65p" id="idbatt_CB1"></td>							
+						</tr>
+						<!-- BATTERY CB2 -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_battCB2"></td>
+							<td class="tabal_right width_65p" id="idbatt_CB2"></td>							
+						</tr>
+						<!-- BATTERY CB3 -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_battCB3"></td>
+							<td class="tabal_right width_65p" id="idbatt_CB3"></td>		
+						</tr>	
+						<!-- BATTERY CB4 -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_battCB4"></td>
+							<td class="tabal_right width_65p" id="idbatt_CB4"></td>		
+						</tr>						
+					</tbody>
+				</table>
+
+				<table>
+					<tr>
+						<td height="5px"></td>
+					</tr>
+				</table>
+
+			</form>
+
+		</div>
+
+	</body>
+</html>

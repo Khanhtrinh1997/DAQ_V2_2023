@@ -1,0 +1,134 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<link rel="stylesheet" href="./css/status.css" type="text/css"> 
+		<script type="text/javascript" src="./js/util.js"></script>
+		<script type="text/javascript" src="./js/constant.js"></script>
+		<script type="text/javascript" src="./js/tabdes.js"></script>
+		<script type="text/javascript" src="./js/jsdiff.js"></script>
+		<script type="text/javascript" src="./js/alarm_general_alarm.js"></script>
+		<script type="text/javascript">
+			document.write("<title>"+LanguageUI["V_STAT_dhcpWebtitle"]+"</title>") ;
+			// Session Key
+			var vAlarmBattHiTemp = 0;
+			var vAlarmLLVD = 0;
+			var vAlarmBLVD = 0;
+			var vAlarmDCLow = 0;
+			var vAlarmACFail = 0;
+			var vAlarmBattCB = 0;
+			var vAlarmLoadCB = 0;
+			var vAlarmRectACFault = 0;
+			var vAlarmRectNoResp = 0;
+			var vAlarmManMode = 0;
+			var vAlarmAcThres = 0;
+			var vAlarmSmoke = 0;
+			var vAlarmDoorOpen = 0;
+		
+		</script>
+	</head>
+	<body onload="LoadFrame()" class="mainbody">
+		<div style="overflow-x:hidden; overflow-y:auto; WIDTH: 100%; HEIGHT: 460px">
+			<form id="ConfigForm">
+				<!-- INTRODUCTION TEXT -->
+				<table class="width_100p" id="tabTest" border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td class="prompt">
+							<table class="width_100p" border="0" cellpadding="0" cellspacing="0">
+								<tbody>
+									<tr>
+										<td class="title_common" BindText="V_ALARM_generalTitleIntro"></td>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+						<tr>
+							<td class="height5p"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="tabal_bg width_100p" id="dhcpinfo" align="center" border="0" cellpadding="0" cellspacing="1">
+					<tbody>				
+						<!-- ALARM BATTERY HIGH TEMP -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_ALARM_alarmBattHiTemp" ></td>
+							<td class="tabal_right width_65p" id="idalarm_BattHiTemp"></td>							
+						</tr>
+						<!-- ALARM LLVD -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_ALARM_alarmLLVD"></td>
+							<td class="tabal_right width_65p" id="idalarm_LLVD"></td>							
+						</tr>
+						<!-- ALARM BLVD -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_ALARM_alarmBLVD"></td>
+							<td class="tabal_right width_65p " id="idalarm_BLVD"></td>							
+						</tr>		
+						<!-- ALARM DC LOW -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_ALARM_alarmDCLow"></td>
+							<td class="tabal_right width_65p" id="idalarm_DCLow"></td>							
+						</tr>
+						<!-- ALARM AC FAIL -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_ALARM_alarmACFail"></td>
+							<td class="tabal_right width_65p" id="idalarm_ACFail"></td>							
+						</tr>
+						<!-- ALARM BATTERY CB -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_ALARM_alarmBattCB"></td>
+							<td class="tabal_right width_65p" id="idalarm_BattCB"></td>							
+						</tr>
+						<!-- ALARM LOAD CB -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_ALARM_alarmLoadCB"></td>
+							<td class="tabal_right width_65p" id="idalarm_LoadCB"></td>		
+						</tr>	
+						<!-- ALARM RECT AC FAULT -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_ALARM_alarmRectACFault"></td>
+							<td class="tabal_right width_65p" id="idalarm_RectACFault"></td>		
+						</tr>	
+						<!-- ALARM RECT NO RESPONSE -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_ALARM_alarmRectNoResp"></td>
+							<td class="tabal_right width_65p" id="idalarm_RectNoResp"></td>		
+						</tr>
+						<!-- ALARM MANUAL MODE -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_ALARM_alarmManMode"></td>
+							<td class="tabal_right width_65p" id="idalarm_ManMode"></td>		
+						</tr>	
+						<!-- ALARM AC LOW -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_ALARM_alarmACThres"></td>
+							<td class="tabal_right width_65p" id="idalarm_ACThres"></td>		
+						</tr>	
+						<!-- ALARM SMOKE -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_ALARM_alarmSmoke"></td>
+							<td class="tabal_right width_65p" id="idalarm_Smoke"></td>		
+						</tr>	
+						<!-- ALARM DOOR OPEN -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_ALARM_alarmDoorOpen"></td>
+							<td class="tabal_right width_65p" id="idalarm_DoorOpen"></td>		
+						</tr>							
+					</tbody>
+				</table>
+
+				<table>
+					<tr>
+						<td height="5px"></td>
+					</tr>
+				</table>
+
+			</form>
+
+		</div>
+
+	</body>
+</html>

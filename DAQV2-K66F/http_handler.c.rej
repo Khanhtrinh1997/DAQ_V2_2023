@@ -1,0 +1,9 @@
+diff a/DAQV2-K66F/http_handler.c b/DAQV2-K66F/http_handler.c	(rejected hunks)
+@@ -2158,6 +2158,7 @@
+                     sModbusManager.sLIBManager[j-1].u8LIBNumOfReg[2] = 2;
+                 }
+                 break;
++                case 12:// SHOTO_SDA10_48100 
+                 case 3:// SHOTO_2019
+                 {
+                     sModbusManager.sLIBManager[j-1].u32LIBSlaveOffset = 0;

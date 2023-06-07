@@ -1,0 +1,108 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<link rel="stylesheet" href="./css/status.css" type="text/css"> 
+		<script type="text/javascript" src="./js/util.js"></script>
+		<script type="text/javascript" src="./js/constant.js"></script>
+		<script type="text/javascript" src="./js/tabdes.js"></script>
+		<script type="text/javascript" src="./js/jsdiff.js"></script>
+		<script type="text/javascript" src="./js/param_pm_dc_info.js"></script>
+		<script type="text/javascript">
+			document.write("<title>"+LanguageUI["V_STAT_dhcpWebtitle"]+"</title>") ;
+			// Session Key
+			var vPMInstalledPM = 0;
+			var vPMRunningPM = 0;
+			var vPMModel = 0;
+			var vPMSerialNumber = 0;	
+			var vPMVoltage = 0;	
+			var vPMCurr = 0;	
+			var vPMFreq = 0;	
+			var vPMPF = 0;	
+			var vPMActivePower = 0;	
+			var vPMReactivePower = 0;	
+			var vPMActiveEnergy = 0;	
+			var vPMReactiveEnergy = 0;				
+			
+		</script>
+	</head>
+	<body onload="LoadFrame()" class="mainbody">
+		<div style="overflow-x:hidden; overflow-y:auto; WIDTH: 100%; HEIGHT: 460px">
+			<form id="ConfigForm">
+				<!-- INTRODUCTION TEXT -->
+				<table class="width_100p" id="tabTest" border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td class="prompt">
+							<table class="width_100p" border="0" cellpadding="0" cellspacing="0">
+								<tbody>
+									<tr>
+										<td class="title_common" BindText="V_STAT_pm_dcInfoTitleIntro"></td>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+						<tr>
+							<td class="height5p"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="tabal_bg width_100p" id="dhcpinfo" align="center" border="0" cellpadding="0" cellspacing="1">
+					<tbody>								
+						<!-- PM CONNECT STATUS -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_pmConnect" ></td>
+							<td class="tabal_right width_65p" id="idpmdc_Connect"></td>							
+						</tr>
+						<!-- PM INSTALLED PM -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_PM_DC_INSTALLED" ></td>
+							<td class="tabal_right width_65p" id="idpmdc_InstalledPM"></td>							
+						</tr>
+						<!-- PM RUNNING PM -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_PM_DC_RUNNING"></td>
+							<td class="tabal_right width_65p" id="idpmdc_RunningPM"></td>							
+						</tr>					
+						<!-- PM MODEL -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_pmModel"></td>
+							<td class="tabal_right width_65p " id="idpmdc_Model"></td>							
+						</tr>							
+						<!-- PM VOLTAGE -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_pmVoltage"></td>
+							<td class="tabal_right width_65p" id="idpmdc_Voltage"></td>							
+						</tr>
+						<!-- PM CURRENT -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_pm_dc_current"></td>
+							<td class="tabal_right width_65p" id="idpmdc_current"></td>							
+						</tr>
+						<!-- PM ACTIVEC POWER -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_pmActivePower"></td>
+							<td class="tabal_right width_65p" id="idpmdc_AcPo"></td>							
+						</tr>
+						<!-- PM ACTIVEC ENERGY -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_pmActiveEnergy"></td>
+							<td class="tabal_right width_65p" id="idpmdc_AcEn"></td>							
+						</tr>						
+					</tbody>
+				</table>
+
+				<table>
+					<tr>
+						<td height="5px"></td>
+					</tr>
+				</table>
+
+			</form>
+
+		</div>
+
+	</body>
+</html>

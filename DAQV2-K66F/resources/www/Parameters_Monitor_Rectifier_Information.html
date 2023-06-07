@@ -1,0 +1,179 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<link rel="stylesheet" href="./css/status.css" type="text/css"> 
+		<script type="text/javascript" src="./js/util.js"></script>
+		<script type="text/javascript" src="./js/constant.js"></script>
+		<script type="text/javascript" src="./js/tabdes.js"></script>
+		<script type="text/javascript" src="./js/jsdiff.js"></script>
+		<script type="text/javascript" src="./js/param_rect_info.js"></script>
+		<script type="text/javascript">
+			document.write("<title>"+LanguageUI["V_STAT_dhcpWebtitle"]+"</title>") ;
+			// Session Key	
+		</script>
+	</head>
+	<body onload="LoadFrame()" class="mainbody">
+		<div style="overflow-x:hidden; overflow-y:auto; WIDTH: 100%; HEIGHT: 460px">
+			<form id="ConfigForm">
+				<!-- INTRODUCTION TEXT -->
+				<table class="width_100p" id="tabTest" border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td class="prompt">
+							<table class="width_100p" border="0" cellpadding="0" cellspacing="0">
+								<tbody>
+									<tr>
+										<td class="title_common" BindText="V_STAT_rectInfoTitleIntro"></td>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+						<tr>
+							<td class="height5p"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table>
+					<tr>
+						<td height="5px"></td>
+					</tr>
+				</table>
+
+				<!-- CLIENT INFO -->
+				<table class="tabal_bg width_100p" id="dhcpinfodat" align="center" border="0" cellpadding="0" cellspacing="1">
+					<!--<tr class="tabal_center01 trTabContent">
+					<td style="width:20%">%s</td>
+					<td style="width:20%">%s</td>
+					<td style="width:20%">%s</td>
+					<td style="width:20%">%s</td>
+					<td style="width:20%">%s</td>
+					</tr>
+					-->
+					<tbody>
+						<tr class="tabal_title">
+							<td BindText="V_STAT_rectID"></td>
+							
+							<td BindText="V_STAT_rectVolt"></td>
+							<td BindText="V_STAT_rectCurr"></td>
+							<td BindText="V_STAT_rectTemp"></td>						
+						</tr>
+
+						<!-- <script>							
+							for (i = 0; i < 5; i++) {								
+								document.write('<TR class="tabal_center01 trTabContent">');
+								document.write('<TD style="width:20%">' +  RECTListInfo[i].id + '</TD>');
+								document.write('<TD style="width:20%"> ' + RECTListInfo[i].voltage + '</TD>');
+								document.write('<TD style="width:20%">' + RECTListInfo[i].current + '</TD>');
+								document.write('<TD style="width:20%">' + RECTListInfo[i].temperature + '</TD>');
+								//document.write('<TD style="width:20%">' + DHCPListInfo[i].ifName + '</TD>');
+								document.write('</TR>');
+							}
+						</script> -->
+						
+						<tr class="tabal_center01 trTabContent">		
+						<td class="tabal_center01 width_25p" id="idrect_id1"></td>	
+						
+						<td class="tabal_center01 width_25p" id="idrect_voltage1"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_current1"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_temp1"></td>	
+						</tr>
+						
+						<tr class="tabal_center01 trTabContent">		
+						<td class="tabal_center01 width_25p" id="idrect_id2"></td>	
+						
+						<td class="tabal_center01 width_25p" id="idrect_voltage2"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_current2"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_temp2"></td>	
+						</tr>
+						
+						<tr class="tabal_center01 trTabContent">		
+						<td class="tabal_center01 width_25p" id="idrect_id3"></td>	
+						
+						<td class="tabal_center01 width_25p" id="idrect_voltage3"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_current3"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_temp3"></td>	
+						</tr>
+						
+						<tr class="tabal_center01 trTabContent">		
+						<td class="tabal_center01 width_25p" id="idrect_id4"></td>	
+						
+						<td class="tabal_center01 width_25p" id="idrect_voltage4"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_current4"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_temp4"></td>	
+						</tr>
+						
+						<tr class="tabal_center01 trTabContent">		
+						<td class="tabal_center01 width_25p" id="idrect_id5"></td>	
+						
+						<td class="tabal_center01 width_25p" id="idrect_voltage5"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_current5"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_temp5"></td>	
+						</tr>
+						
+						<tr class="tabal_center01 trTabContent">		
+						<td class="tabal_center01 width_25p" id="idrect_id6"></td>	
+						
+						<td class="tabal_center01 width_25p" id="idrect_voltage6"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_current6"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_temp6"></td>	
+						</tr>
+						
+						<tr class="tabal_center01 trTabContent">		
+						<td class="tabal_center01 width_25p" id="idrect_id7"></td>	
+						
+						<td class="tabal_center01 width_25p" id="idrect_voltage7"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_current7"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_temp7"></td>	
+						</tr>
+						
+						<tr class="tabal_center01 trTabContent">		
+						<td class="tabal_center01 width_25p" id="idrect_id8"></td>	
+						
+						<td class="tabal_center01 width_25p" id="idrect_voltage8"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_current8"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_temp8"></td>	
+						</tr>
+						
+						<tr class="tabal_center01 trTabContent">		
+						<td class="tabal_center01 width_25p" id="idrect_id9"></td>	
+						
+						<td class="tabal_center01 width_25p" id="idrect_voltage9"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_current9"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_temp9"></td>	
+						</tr>
+						
+						<tr class="tabal_center01 trTabContent">		
+						<td class="tabal_center01 width_25p" id="idrect_id10"></td>	
+						
+						<td class="tabal_center01 width_25p" id="idrect_voltage10"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_current10"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_temp10"></td>	
+						</tr>
+						
+						<tr class="tabal_center01 trTabContent">		
+						<td class="tabal_center01 width_25p" id="idrect_id11"></td>	
+						
+						<td class="tabal_center01 width_25p" id="idrect_voltage11"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_current11"></td>	
+						<td class="tabal_center01 width_25p" id="idrect_temp11"></td>	
+						</tr>
+
+						<tr class="tabal_center01 trTabContent">
+							<td style="width:25%">--</td>
+						
+							<td style="width:25%">--</td>
+							<td style="width:25%">--</td>
+							<td style="width:25%">--</td>
+							<!--<td style="width:20%"></td>-->
+						</tr>
+					</tbody>
+				</table>
+			</form>
+
+		</div>
+
+	</body>
+</html>

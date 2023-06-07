@@ -1,0 +1,161 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<link rel="stylesheet" href="./css/status.css" type="text/css"><!--#p1vars--><!--#p1tvars--><!--#p1ipvar-->
+		<script type="text/javascript" src="./js/util.js"></script>
+		<script type="text/javascript" src="./js/constant.js"></script>
+		<script type="text/javascript" src="./js/tabdes.js"></script>
+		<script type="text/javascript" src="./js/jsdiff.js"></script>
+		<script type="text/javascript" src="./js/jquery.min.js"></script>
+		<script type="text/javascript" src="./js/param_emerson_v21_setup.js"></script>
+		<script type="text/javascript">
+			document.write("<title>"+LanguageUI["V_STAT_dhcpWebtitle"]+"</title>") ;
+			// Session Key
+			
+		</script>
+	</head>
+	<body onload="LoadFrame()" class="mainbody">
+		<div style="overflow-x:hidden; overflow-y:auto; WIDTH: 100%; HEIGHT: 460px">
+			<form id="ConfigForm">
+				<!-- INTRODUCTION TEXT -->
+				<table class="width_100p" id="tabTest" border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td class="prompt">
+							<table class="width_100p" border="0" cellpadding="0" cellspacing="0">
+								<tbody>
+									<tr>
+										<td class="title_common" BindText="V_CONFIG_configInfoTitleIntro"></td>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+						<tr>
+							<td class="height5p"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="tabal_bg width_100p" id="dhcpinfo" align="center" border="0" cellpadding="0" cellspacing="1">				
+					<tbody>	
+						<!-- BATTERY CHARGE CURRENT LIMIT -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_CONFIG_battCCL"></td>
+							<td class="tabal_right width_25p " id="idconfigbatt_CCL"></td>
+							<td class="tabal_right width_35p "><input maxlength="5" size="6" name="cfgcl" id="cfgcl"> C10<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBattCCLSet()" name="Submit" id="Submit1"></td>
+						</tr>
+						<!-- BATTERY BOOST CHARGE VOLTAGE -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_CONFIG_battBVolt"></td>
+							<td class="tabal_right width_25p " id="idconfigbatt_BVolt"></td>
+							<td class="tabal_right width_35p "><input maxlength="5" size="6" name="cfgbv" id="cfgbv"> V<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBattBVSet()" name="Submit" id="Submit3"></td>
+						</tr>						
+						<!-- BATTERY FLOAT CHARGE VOLTAGE -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_CONFIG_battFVolt"></td>
+							<td class="tabal_right width_25p " id="idconfigbatt_FVolt"></td>
+							<td class="tabal_right width_35p "><input maxlength="5" size="6" name="cfgfv" id="cfgfv"> V<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBattFVSet()" name="Submit" id="Submit2"></td>
+						</tr>
+						<!-- BATTERY DC OVER VOLTAGE -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_CONFIG_battDCOver"></td>
+							<td class="tabal_right width_25p " id="idconfigbatt_DCOver"></td>
+							<td class="tabal_right width_35p "><input maxlength="5" size="6" name="cfgdcov" id="cfgdcov"> V<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBattDCOverSet()" name="Submit" id="Submit22"></td>							
+						<!-- BATTERY DC LOW VOLTAGE -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_CONFIG_battDCLow"></td>
+							<td class="tabal_right width_25p " id="idconfigbatt_DCLow"></td>
+							<td class="tabal_right width_35p "><input maxlength="5" size="6" name="cfgdcav" id="cfgdcav"> V<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBattDCLowSet()" name="Submit" id="Submit4"></td>
+						</tr>
+						<!-- BATTERY LLVD VOLTAGE -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_CONFIG_battLLVD"></td>
+							<td class="tabal_right width_25p " id="idconfigbatt_LLVD"></td>
+							<td class="tabal_right width_35p "><input maxlength="5" size="6" name="cfglvdav" id="cfglvdav"> V<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBattLLVDSet()" name="Submit" id="Submit5"></td>
+						</tr>
+						<!-- BATTERY BLVD VOLTAGE -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_CONFIG_battBLVD"></td>
+							<td class="tabal_right width_25p " id="idconfigbatt_BLVD"></td>
+							<td class="tabal_right width_35p "><input maxlength="5" size="6" name="cfgbvdav" id="cfgbvdav"> V<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBattBLVDSet()" name="Submit" id="Submit6"></td>
+						</tr>
+						<!-- BATTERY TEMP COMPENSATION -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_CONFIG_battTempComp"></td>
+							<td class="tabal_right width_25p " id="idconfigbatt_TempComp"></td>
+							<td class="tabal_right width_35p "><input maxlength="5" size="6" name="cfgtc" id="cfgtc"> mV/C/String<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBattTempCompSet()" name="Submit" id="Submit7"></td>
+						</tr>
+						<!-- BATTERY CAPACITY -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_CONFIG_battCap"></td>
+							<td class="tabal_right width_25p " id="idconfigbatt_Cap"></td>
+							<td class="tabal_right width_35p "><input maxlength="5" size="6" name="cfgctot" id="cfgctot"> Ah<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBattCapSet()" name="Submit" id="Submit8"></td>
+						</tr>
+						<!-- AC HIGH LEVEL -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_CONFIG_acHiThres"></td>
+							<td class="tabal_right width_25p " id="idconfigbatt_HiThres"></td>
+							<td class="tabal_right width_35p "><input maxlength="5" size="6" name="cfgachi" id="cfgachi"> V<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fAcHiThresSet()" name="Submit" id="Submit14"></td>
+						</tr>	
+						<!-- AC LOW LEVEL -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_CONFIG_acLowThres"></td>
+							<td class="tabal_right width_25p " id="idconfigbatt_LowThres"></td>
+							<td class="tabal_right width_35p "><input maxlength="5" size="6" name="cfgaclow" id="cfgaclow"> V<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fAcLowThresSet()" name="Submit" id="Submit10"></td>
+						</tr>						
+						<!-- BATTERY HIGH TEMPERATURE LEVEL -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_CONFIG_battHiTemp"></td>
+							<td class="tabal_right width_25p " id="idconfigbatt_HiTemp"></td>
+							<td class="tabal_right width_35p "><input maxlength="5" size="6" name="cfghmjta" id="cfghmjta"> (*C)<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBattHiTempSet()" name="Submit" id="Submit9"></td>
+						</tr>			
+						<!-- BATT TEST END TEST VOLT -->
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_CONFIG_battTestEndVolt_v21"></td>
+							<td class="tabal_right width_20p " id="idcfgbt_TestVolt"></td>
+							<td class="tabal_right width_45p "><input maxlength="5" size="6" name="cfgbttv" id="cfgbttv"> (V)<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBTTestVoltSet()" name="Submit" id="Submit11"></td>
+						</tr>						
+						<!-- BATT TEST END TEST CAPACITY -->
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_CONFIG_battTestEndCap_v21"></td>
+							<td class="tabal_right width_20p " id="idcfgbt_EndCap"></td>
+							<td class="tabal_right width_45p "><input maxlength="5" size="6" name="cfgbtec" id="cfgbtec"> (C10)<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBTEndCapSet()" name="Submit" id="Submit12"></td>
+						</tr>						
+						<!-- BATT TEST END TEST TIME -->
+						<tr >
+							<td class="tabal_left width_25p" BindText="V_CONFIG_battTestEndTime_v21"></td>
+							<td class="tabal_right width_20p " id="idcfgbt_EndTime"></td>
+							<td class="tabal_right width_45p "><input maxlength="5" size="6" name="cfgbtet" id="cfgbtet"> (m)<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBTEndTimeSet()" name="Submit" id="Submit13"></td>
+						</tr>								
+					</tbody>
+				</table>
+		
+				<table>
+					<tr>
+						<td height="5px"></td>
+					</tr>
+				</table>
+				
+			</form>
+
+		</div>
+
+	</body>
+</html>

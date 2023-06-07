@@ -1,0 +1,251 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<link rel="stylesheet" href="./css/status.css" type="text/css">
+		<script type="text/javascript" src="./js/util.js"></script>
+		<script type="text/javascript" src="./js/constant.js"></script>
+		<script type="text/javascript" src="./js/tabdes.js"></script>
+		<script type="text/javascript" src="./js/jsdiff.js"></script>
+		<script type="text/javascript" src="./js/param_batt_test_setup.js"></script>
+		<script type="text/javascript">
+			document.write("<title>"+LanguageUI["V_STAT_dhcpWebtitle"]+"</title>") ;
+			// Session Key
+		
+		</script>
+	</head>
+	<body onload="LoadFrame()" class="mainbody">
+		<div style="overflow-x:hidden; overflow-y:auto; WIDTH: 100%; HEIGHT: 460px">
+			<form id="ConfigForm">
+				<!-- INTRODUCTION TEXT -->
+				<table class="width_100p" id="tabTest" border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td class="prompt">
+							<table class="width_100p" border="0" cellpadding="0" cellspacing="0">
+								<tbody>
+									<tr>
+										<td class="title_common" BindText="V_CONFIG_configInfoTitleIntro"></td>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+						<tr>
+							<td class="height5p"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="tabal_bg width_100p" id="generalinfo" align="center" border="0" cellpadding="0" cellspacing="1">				
+					<tbody>					
+						<!-- BATT TEST END VOLTAGE -->
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_CONFIG_battTestEndVolt"></td>
+							<td class="tabal_right width_20p " id="idcfgbt_EndVolt"></td>
+							<td class="tabal_right width_45p "><input maxlength="5" size="6" name="cfgbtev" id="cfgbtev"> (V)<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBTEndVoltSet()" name="Submit" id="Submit1">
+						</tr>
+						<!-- BATT TEST END CAPACITY -->
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_CONFIG_battTestEndCap"></td>
+							<td class="tabal_right width_20p " id="idcfgbt_EndCap"></td>
+							<td class="tabal_right width_45p "><input maxlength="5" size="6" name="cfgbtec" id="cfgbtec"> (%)<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBTEndCapSet()" name="Submit" id="Submit2">
+						</tr>						
+						<!-- BATT TEST END TIME -->
+						<tr >
+							<td class="tabal_left width_25p" BindText="V_CONFIG_battTestEndTime"></td>
+							<td class="tabal_right width_20p " id="idcfgbt_EndTime"></td>
+							<td class="tabal_right width_45p "><input maxlength="5" size="6" name="cfgbtet" id="cfgbtet"> (m)<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBTEndTimeSet()" name="Submit" id="Submit4">
+						</tr>
+						<!-- BATT TEST MODE -->						
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_CONFIG_battTestMode"></td>
+							<td class="tabal_right width_20p " id="idcfgbt_Mode"></td>
+							<td class="tabal_right width_45p "><select size="1" name="cfgbtm" id="cfgbtm"><option value="0">Auto</option><option value="1">Manual</option></select></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBTModeSet()" name="Submit" id="Submit5">
+						</tr>
+						<!-- BATT TEST PLAN TEST OPTION -->
+						<tr>
+							<td class="tabal_left width_25p" BindText="V_CONFIG_battTestPlanEn"></td>
+							<td class="tabal_right width_20p " id="idcfgbt_PlanTestEn"></td>
+							<td class="tabal_right width_45p "><select size="1" name="cfgbtpte" id="cfgbtpte"><option value="0">Disable</option><option value="1">Enable</option></select></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBTPlanTestEnSet()" name="Submit" id="Submit3">
+						</tr>						
+					</tbody>
+				</table>
+				
+				<table class="width_100p" border="0" cellpadding="2" cellspacing="2">
+					<tbody>
+						<tr>	
+							<td>Test Option:</td>						
+						</tr>
+					</tbody>
+				</table>
+				
+				<table class="tabal_bg width_100p" id="modeinfo" align="center" border="0" cellpadding="0" cellspacing="1">				
+					<tbody>		
+						<!-- BATT TEST MANUAL START -->
+						<tr id = "menu-manstart">
+							<td class="tabal_left width_25p" BindText="V_CONFIG_battTestManStart"></td>
+							<td class="tabal_right width_20p " id="idcfgbt_ManStart"></td>
+							<td class="tabal_right width_45p "><select size="1" name="cfgbtms" id="cfgbtms"><option value="0">Float</option><option value="1">Boost</option><option value="2">Test</option></select></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBTManStartSet()" name="Submit" id="Submit3">
+						</tr>
+						<!-- PLANNED TEST 1 -->
+						<tr id = "menu-plantest1">
+							<td class="tabal_left width_25p" BindText="V_CONFIG_battTestPlanTest1"></td>			
+							<td class="tabal_right width_20p " id="idcfgbt_plan1"></td>												
+							<td class="tabal_right width_45p ">Month:
+							<select size="1" name="cfgbpt1m" id="cfgbpt1m">
+								<option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option>
+								<option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option>
+								<option value="9">Septemper</option><option value="10">October</option><option value="11">November</option><option value="12">December</option>
+							</select>Date:							
+							<select size="1" name="cfgbpt1d" id="cfgbpt1d">
+								<option value="1">01</option><option value="2">02</option><option value="3">03</option>
+								<option value="4">04</option><option value="5">05</option><option value="6">06</option>
+								<option value="7">07</option><option value="8">08</option><option value="9">09</option>
+								<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+								<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+								<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+								<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+								<option value="22">22</option><option value="23">23</option><option value="24">24</option>
+								<option value="25">25</option><option value="26">26</option><option value="27">27</option>
+								<option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
+							</select>Hour:
+							<select size="1" name="cfgbpt1h" id="cfgbpt1h">
+								<option value="0">00</option><option value="1">01</option><option value="2">02</option><option value="3">03</option>
+								<option value="4">04</option><option value="5">05</option><option value="6">06</option>
+								<option value="7">07</option><option value="8">08</option><option value="9">09</option>
+								<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+								<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+								<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+								<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+								<option value="22">22</option><option value="23">23</option>
+							</select>							
+							</td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBTPL1Set()" name="Submit" id="Submit9">							
+						</tr>	
+						<!-- PLANNED TEST 2 -->
+						<tr id = "menu-plantest2">
+							<td class="tabal_left width_25p" BindText="V_CONFIG_battTestPlanTest2"></td>
+							<td class="tabal_right width_20p " id="idcfgbt_plan2"></td>
+							<td class="tabal_right width_45p ">Month:
+							<select size="1" name="cfgbpt2m" id="cfgbpt2m">
+								<option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option>
+								<option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option>
+								<option value="9">Septemper</option><option value="10">October</option><option value="11">November</option><option value="12">December</option>
+							</select>Date:							
+							<select size="1" name="cfgbpt2d" id="cfgbpt2d">
+								<option value="1">01</option><option value="2">02</option><option value="3">03</option>
+								<option value="4">04</option><option value="5">05</option><option value="6">06</option>
+								<option value="7">07</option><option value="8">08</option><option value="9">09</option>
+								<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+								<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+								<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+								<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+								<option value="22">22</option><option value="23">23</option><option value="24">24</option>
+								<option value="25">25</option><option value="26">26</option><option value="27">27</option>
+								<option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
+							</select>Hour:
+							<select size="1" name="cfgbpt2h" id="cfgbpt2h">
+								<option value="0">00</option><option value="1">01</option><option value="2">02</option><option value="3">03</option>
+								<option value="4">04</option><option value="5">05</option><option value="6">06</option>
+								<option value="7">07</option><option value="8">08</option><option value="9">09</option>
+								<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+								<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+								<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+								<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+								<option value="22">22</option><option value="23">23</option>
+							</select>							
+							</td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBTPL2Set()" name="Submit" id="Submit9">
+						</tr>	
+						<!-- PLANNED TEST 3 -->
+						<tr id = "menu-plantest3">
+							<td class="tabal_left width_25p" BindText="V_CONFIG_battTestPlanTest3"></td>
+							<td class="tabal_right width_20p " id="idcfgbt_plan3"></td>
+							<td class="tabal_right width_45p ">Month:
+							<select size="1" name="cfgbpt3m" id="cfgbpt3m">
+								<option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option>
+								<option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option>
+								<option value="9">Septemper</option><option value="10">October</option><option value="11">November</option><option value="12">December</option>
+							</select>Date:							
+							<select size="1" name="cfgbpt3d" id="cfgbpt3d">
+								<option value="1">01</option><option value="2">02</option><option value="3">03</option>
+								<option value="4">04</option><option value="5">05</option><option value="6">06</option>
+								<option value="7">07</option><option value="8">08</option><option value="9">09</option>
+								<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+								<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+								<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+								<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+								<option value="22">22</option><option value="23">23</option><option value="24">24</option>
+								<option value="25">25</option><option value="26">26</option><option value="27">27</option>
+								<option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
+							</select>Hour:
+							<select size="1" name="cfgbpt3h" id="cfgbpt3h">
+								<option value="0">00</option><option value="1">01</option><option value="2">02</option><option value="3">03</option>
+								<option value="4">04</option><option value="5">05</option><option value="6">06</option>
+								<option value="7">07</option><option value="8">08</option><option value="9">09</option>
+								<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+								<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+								<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+								<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+								<option value="22">22</option><option value="23">23</option>
+							</select>							
+							</td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBTPL3Set()" name="Submit" id="Submit9">
+						</tr>	
+						<!-- PLANNED TEST 4 -->
+						<tr id = "menu-plantest4">
+							<td class="tabal_left width_25p" BindText="V_CONFIG_battTestPlanTest4"></td>
+							<td class="tabal_right width_20p " id="idcfgbt_plan4"></td>
+							<td class="tabal_right width_45p ">Month:
+							<select size="1" name="cfgbpt4m" id="cfgbpt4m">
+								<option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option>
+								<option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option>
+								<option value="9">Septemper</option><option value="10">October</option><option value="11">November</option><option value="12">December</option>
+							</select>Date:							
+							<select size="1" name="cfgbpt4d" id="cfgbpt4d">
+								<option value="1">01</option><option value="2">02</option><option value="3">03</option>
+								<option value="4">04</option><option value="5">05</option><option value="6">06</option>
+								<option value="7">07</option><option value="8">08</option><option value="9">09</option>
+								<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+								<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+								<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+								<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+								<option value="22">22</option><option value="23">23</option><option value="24">24</option>
+								<option value="25">25</option><option value="26">26</option><option value="27">27</option>
+								<option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
+							</select>Hour:
+							<select size="1" name="cfgbpt4h" id="cfgbpt4h">
+								<option value="0">00</option><option value="1">01</option><option value="2">02</option><option value="3">03</option>
+								<option value="4">04</option><option value="5">05</option><option value="6">06</option>
+								<option value="7">07</option><option value="8">08</option><option value="9">09</option>
+								<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+								<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+								<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+								<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+								<option value="22">22</option><option value="23">23</option>
+							</select>							
+							</td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBTPL4Set()" name="Submit" id="Submit9">
+						</tr>							
+					</tbody>
+				</table>
+
+				<table>
+					<tr>
+						<td height="5px"></td>
+					</tr>
+				</table>
+				
+			</form>
+
+		</div>
+
+	</body>
+</html>

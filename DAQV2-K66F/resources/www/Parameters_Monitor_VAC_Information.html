@@ -1,0 +1,134 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<link rel="stylesheet" href="./css/status.css" type="text/css"> 
+		<script type="text/javascript" src="./js/util.js"></script>
+		<script type="text/javascript" src="./js/constant.js"></script>
+		<script type="text/javascript" src="./js/tabdes.js"></script>
+		<script type="text/javascript" src="./js/jsdiff.js"></script>
+		<script type="text/javascript" src="./js/param_vac_info.js"></script>
+		<script type="text/javascript">
+			document.write("<title>"+LanguageUI["V_STAT_dhcpWebtitle"]+"</title>") ;
+			// Session Key
+			var vVACInstalledFan = 0;
+			var vVACRunningFan = 0;
+			var vVACModel = 0;
+			var vVACSysMode = 0;	
+			var vVACFanMode = 0;	
+			var vVACInTemp = 0;	
+			var vVACExTemp = 0;	
+			var vVACFan1Speed = 0;	
+			var vVACFan2Speed = 0;	
+			var vVACAlarmCode = 0;	
+			var vVACConnectStatus = 0;		
+			var vVACSerialNum = 0;		
+			
+			
+		</script>
+	</head>
+	<body onload="LoadFrame()" class="mainbody">
+		<div style="overflow-x:hidden; overflow-y:auto; WIDTH: 100%; HEIGHT: 460px">
+			<form id="ConfigForm">
+				<!-- INTRODUCTION TEXT -->
+				<table class="width_100p" id="tabTest" border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td class="prompt">
+							<table class="width_100p" border="0" cellpadding="0" cellspacing="0">
+								<tbody>
+									<tr>
+										<td class="title_common" BindText="V_STAT_vacInfoTitleIntro"></td>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+						<tr>
+							<td class="height5p"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="tabal_bg width_100p" id="dhcpinfo" align="center" border="0" cellpadding="0" cellspacing="1">
+					<tbody>							
+						<!-- VAC CONNECT STATUS -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_vacConnect" ></td>
+							<td class="tabal_right width_65p" id="idvac_Connect"></td>							
+						</tr>				
+						<!-- VAC INSTALLED FAN -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_vacInstalledFan" ></td>
+							<td class="tabal_right width_65p" id="idvac_InstalledFan"></td>							
+						</tr>
+						<!-- VAC RUNNING FAN -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_vacRunningFan"></td>
+							<td class="tabal_right width_65p" id="idvac_RunningFan"></td>							
+						</tr>
+						<!-- VAC MODEL -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_vacModel"></td>
+							<td class="tabal_right width_65p " id="idvac_Model"></td>							
+						</tr>	
+						<!-- VAC SERIAL -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_vacSerial"></td>
+							<td class="tabal_right width_65p " id="idvac_Serial"></td>							
+						</tr>
+						<!-- VAC SYSTEM MODE -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_vacSysmode"></td>
+							<td class="tabal_right width_65p" id="idvac_Sysmode"></td>							
+						</tr>
+						<!-- VAC FAN MODE -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_vacFanmode"></td>
+							<td class="tabal_right width_65p" id="idvac_Fanmode"></td>							
+						</tr>	
+						<!-- VAC INTERNAL TEMP -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_vacInTemp"></td>
+							<td class="tabal_right width_65p" id="idvac_InTemp"></td>							
+						</tr>
+						<!-- VAC EXTERNAL TEMP -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_vacExTemp"></td>
+							<td class="tabal_right width_65p" id="idvac_ExTemp"></td>							
+						</tr>
+						<!-- VAC FAN1 SPEED -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_vacFan1Speed"></td>
+							<td class="tabal_right width_65p" id="idvac_Fan1Speed"></td>							
+						</tr>
+						<!-- VAC FAN2 SPEED -->
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_vacFan2Speed"></td>
+							<td class="tabal_right width_65p" id="idvac_Fan1Speed2"></td>							
+						</tr>
+						<!-- VAC ALARM STATUS CODE -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_vacAlarmStatus"></td>
+							<td class="tabal_right width_65p" id="idvac_AlarmStatus"></td>		
+						</tr>		
+						<!-- VAC SW Version -->						
+						<tr>
+							<td class="tabal_left width_35p" BindText="V_STAT_vacSWVersion"></td>
+							<td class="tabal_right width_65p" id="idvac_SWVersion"></td>		
+						</tr>					
+					</tbody>
+				</table>
+
+				<table>
+					<tr>
+						<td height="5px"></td>
+					</tr>
+				</table>
+
+			</form>
+
+		</div>
+
+	</body>
+</html>

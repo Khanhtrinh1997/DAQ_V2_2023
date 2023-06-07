@@ -1,0 +1,139 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<link rel="stylesheet" href="./css/status.css" type="text/css"><!--#p1vars--><!--#p1tvars--><!--#p1ipvar-->
+		<script type="text/javascript" src="./js/util.js"></script>
+		<script type="text/javascript" src="./js/constant.js"></script>
+		<script type="text/javascript" src="./js/tabdes.js"></script>
+		<script type="text/javascript" src="./js/jsdiff.js"></script>
+		<script type="text/javascript" src="./js/device_ip_setup.js"></script>
+		<script type="text/javascript">
+			document.write("<title>"+LanguageUI["V_STAT_dhcpWebtitle"]+"</title>") ;
+			// Session Key
+			var vDevSip;
+			var vDevGip;
+			var vDevMip;
+			var vBTSName;
+			var vCab1Type;
+			var vCab2Type;
+			var vFTPName; 
+			var DHCPListInfo = new Array();
+			parseDHCPobj(dhcpClientList);
+		</script>
+	</head>
+	<body onload="LoadFrame()" class="mainbody">
+		<div style="overflow-x:hidden; overflow-y:auto; WIDTH: 100%; HEIGHT: 460px">
+			<form id="ConfigForm">
+				<!-- INTRODUCTION TEXT -->
+				<table class="width_100p" id="tabTest" border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td class="prompt">
+							<table class="width_100p" border="0" cellpadding="0" cellspacing="0">
+								<tbody>
+									<tr>
+										<td class="title_common" BindText="V_DEV_ipaddTitleIntro"></td>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+						<tr>
+							<td class="height5p"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="tabal_bg width_100p" id="dhcpinfo" align="center" border="0" cellpadding="0" cellspacing="1">
+					<tbody>	
+						<!-- IP ADDRESS -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_DEV_ipAdd"></td>
+							<td class="tabal_right width_25p " id="iddev_IP"></td>
+							<td class="tabal_right width_35p "> 
+							<input maxlength="3" size="3" name="sip1" id="sip1">.
+							<input maxlength="3" size="3" name="sip2" id="sip2">.
+							<input maxlength="3" size="3" name="sip3" id="sip3">.
+							<input maxlength="3" size="3" name="sip4" id="sip4">
+							</td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fDevSIPSet()" name="Submit" id="Submit1">	
+							</td>	
+						<tr>	
+
+						<!-- GATEWAY ADDRESS -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_DEV_gwAdd"></td>
+							<td class="tabal_right width_25p " id="iddev_GW"></td>
+							<td class="tabal_right width_35p "> 
+							<input maxlength="3" size="3" name="gip1" id="gip1">.
+							<input maxlength="3" size="3" name="gip2" id="gip2">.
+							<input maxlength="3" size="3" name="gip3" id="gip3">.
+							<input maxlength="3" size="3" name="gip4" id="gip4">
+						<!--	<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fDevGIPSet()" name="Submit" id="Submit2">-->
+							</td>	
+						<tr>
+
+						<!-- SUBNET MASK ADDRESS -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_DEV_snAdd"></td>
+							<td class="tabal_right width_25p " id="iddev_SN"></td>
+							<td class="tabal_right width_35p "> 
+							<input maxlength="3" size="3" name="mip1" id="mip1">.
+							<input maxlength="3" size="3" name="mip2" id="mip2">.
+							<input maxlength="3" size="3" name="mip3" id="mip3">.
+							<input maxlength="3" size="3" name="mip4" id="mip4">
+							</td>
+							<!--<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fDevMIPSet()" name="Submit" id="Submit3">-->
+							</td>								
+						<tr>
+						
+						<!-- BTS ID -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_CONFIG_btsid"></td>
+							<td class="tabal_right width_25p " id="idbts_ID"></td>
+							<td class="tabal_right width_35p "><input maxlength="25" size="30" name="btsid" id="btsid"><br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fBtsIDSet()" name="Submit" id="Submit4">
+							</td>								
+						<tr>
+						
+						<!-- Cabinet 1 Type -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_CONFIG_cab1type"></td>
+							<td class="tabal_right width_25p " id="idcab1_Type"></td>
+							<td class="tabal_right width_35p "><select size="1" name="cab1_Type" id="cab1_Type"><option value="0">Emerson M500D<option value="3">Emerson M221S</option></option><option value="1">ZTE ZXDU58</option><option value="2">Agisson TPS4800</option><option value="4">DKD51 BDP</option><option value="5">VERTIV M830B</option></select></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fCab1TypeSet()" name="Submit" id="Submit5">
+							</td>								
+						<tr>
+						
+						<!-- Cabinet 2 Type 
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_CONFIG_cab2type"></td>
+							<td class="tabal_right width_25p " id="idcab2_Type"></td>
+							<td class="tabal_right width_35p "><select size="1" name="cab2_Type" id="cab2_Type"><option value="0">Emerson M500D</option><option value="1">ZTE ZXDU58</option><option value="2">Agisson TPS4800</option><option value="3">Emerson M221S</option></select></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fCab2TypeSet()" name="Submit" id="Submit6">
+							</td>								
+						<tr>-->
+						<!-- FTP SERVER NAME -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_CONFIG_ftpservername"></td>
+							<td class="tabal_right width_25p " id="idftp_Name"></td>
+							<td class="tabal_right width_35p "><input maxlength="25" size="30" name="ftpname" id="ftpname"><br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fFtpNameSet()" name="Submit1" id="Submit1">
+							</td>								
+						<tr>
+					</tbody>
+				</table>
+				
+
+				<table>
+					<tr>
+						<td height="5px"></td>
+					</tr>
+				</table>	
+			</form>
+
+		</div>
+
+	</body>
+</html>

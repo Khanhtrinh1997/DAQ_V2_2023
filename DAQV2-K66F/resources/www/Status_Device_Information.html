@@ -1,0 +1,103 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<link rel="stylesheet" href="./css/status.css" type="text/css">
+		<script type="text/javascript" src="./js/util.js"></script>
+		<script type="text/javascript" src="./js/constant.js"></script>
+		<script type="text/javascript" src="./js/tabdes.js"></script>
+		<script type="text/javascript" src="./js/jsdiff.js"></script>
+		<script type="text/javascript">
+			document.write("<title>"+LanguageUI["V_STAT_devWebtitle"]+"</title>") ;
+			// Session Key
+			var sessionKey = '<%ejGetOther(sessionKey)%>';
+
+			// Parameters
+			var vDevType;
+			var vDevDesc;
+			var vDevSN;
+			var vDevHWvers;
+			var vDevSWvers;
+			var vDevManu = '2150082313EGE6000021.C602';			
+			var vDevMAC;
+			
+		</script>
+		<script type="text/javascript" src="./js/status_device_info.js"></script>
+	</head>
+	<body onload="LoadFrame()" class="mainbody">
+
+		<!-- INTRODUCTION TEXT -->
+		<table id="tabTest" border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tbody>
+				<tr>
+					<td class="prompt">
+					<table border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tbody>
+							<tr>
+								<td class="title_common" BindText="V_STAT_devTitleIntro"></td>
+							</tr>
+						</tbody>
+					</table></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<!-- HEIGHT 5PX -->
+		<table height="5" width="100%">
+			<tbody>
+				<tr>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<!-- DEVICE INFO TABLE -->
+		<table class="tabal_bg" border="0" cellpadding="0" cellspacing="1" width="100%">
+			<tbody>
+				<!-- DEVICE TYPE -->
+				<tr>
+					<td class="tabal_left width_diff11" id="td1_1" BindText="V_STAT_devDeviceType"></td>
+					<td class="tabal_right" id="iddev_Type"></td>
+				</tr>
+
+				<!-- DESCRIPTION -->
+				<tr id="tr2">
+					<td class="tabal_left" id="td2_1" BindText="V_STAT_devDes"></td>
+					<td class="tabal_right align_left" id="iddev_Des" dir="ltr">Power System Monitoring Terminal </td>
+				</tr>
+
+				<!-- SN -->
+				<tr id="tr3">
+					<td class="tabal_left" id="td3_1" BindText="V_STAT_devSN"></td>
+					<td class="tabal_right" id="iddev_SN"> 56544D314441515631 (VTM1DAQV1) </td>
+				</tr>
+
+				<!-- HARDWARE VERSION -->
+				<tr id="tr4">
+					<td class="tabal_left" id="td4_1" BindText="V_STAT_devHW"></td>
+					<td class="tabal_right" id="iddev_HW"> HWV1R3 </td>
+				</tr>
+
+				<!-- SOFTWARE VERSION -->
+				<tr id="tr5">
+					<td class="tabal_left" id="td5_1" BindText="V_STAT_devSW" ></td>
+					<td class="tabal_right" id="iddev_SW"> SWV1R3 </td>
+				</tr>
+
+				<!-- MANUFACTURE INFO -->
+				<tr id="tr6">
+					<td class="tabal_left" id="td6_1" BindText="V_STAT_devManu"></td>
+					<td class="tabal_right" id="iddev_MANU">2150082313EGE6000021.C602 </td>
+				</tr>
+				
+				<!-- MAC INFO -->
+				<tr id="tr7">
+					<td class="tabal_left" id="td6_2" BindText="V_STAT_devMAC"></td>
+					<td class="tabal_right" id="iddev_MAC"></td>
+				</tr>
+				
+			</tbody>
+		</table>
+	</body>
+</html>

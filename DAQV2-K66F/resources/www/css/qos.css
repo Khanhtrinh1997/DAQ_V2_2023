@@ -1,0 +1,33 @@
+select, input {
+	width: 30%;
+}
+#qos-sel-enab {
+	width: 5%;
+}
+button {
+	margin-top: 5px;
+	margin-bottom: 2px;
+	padding: 2px;
+	/*width: 100%;*/
+	text-align: center;
+}
+
+#btnApply, #btnCancel, #btnConn-v4, #btnConn-v6 {
+	width: 15%;
+}
+
+#wan-table-info {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+ul#new-remove {
+	list-style-type: none;
+}
+
+li {
+	float: right;
+	/*width: 15%;*/
+	display: inline;
+	margin-left: 5px;
+}

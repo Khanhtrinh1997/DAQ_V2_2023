@@ -1,0 +1,85 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<link rel="stylesheet" href="./css/status.css" type="text/css"><!--#p1vars--><!--#p1tvars--><!--#p1ipvar-->
+		<script type="text/javascript" src="./js/util.js"></script>
+		<script type="text/javascript" src="./js/constant.js"></script>
+		<script type="text/javascript" src="./js/tabdes.js"></script>
+		<script type="text/javascript" src="./js/jsdiff.js"></script>
+		<script type="text/javascript" src="./js/status_snmp_info.js"></script>
+		<script type="text/javascript">
+			document.write("<title>"+LanguageUI["V_STAT_dhcpWebtitle"]+"</title>") ;
+			// Session Key
+			var vSnmpTrapEnb;
+			var vSnmpTrapInt;
+			var vSnmpServerIP;
+			var DHCPListInfo = new Array();
+			parseDHCPobj(dhcpClientList);
+		</script>
+	</head>
+	<body onload="LoadFrame()" class="mainbody">
+		<div style="overflow-x:hidden; overflow-y:auto; WIDTH: 100%; HEIGHT: 460px">
+			<form id="ConfigForm">
+				<!-- INTRODUCTION TEXT -->
+				<table class="width_100p" id="tabTest" border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td class="prompt">
+							<table class="width_100p" border="0" cellpadding="0" cellspacing="0">
+								<tbody>
+									<tr>
+										<td class="title_common" BindText="V_STAT_snmpTitleIntro"></td>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+						<tr>
+							<td class="height5p"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="tabal_bg width_100p" id="dhcpinfo" align="center" border="0" cellpadding="0" cellspacing="1">
+					<tbody>				
+						<!-- SNMP TRAP ENABLE -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_STAT_snmpTrapEnb" ></td>
+							<td class="tabal_right width_25p  " id="idsnmp_TrapEnb"></td>
+							<td class="tabal_right width_35p "><select size="1" name="telnetlp"id="telnetlp"><option value="0">Off-Trap</option><option value="1">One-Shot</option><option value="2">Continuous</option></select></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fTrapModeSet()" name="Submit" id="Submit1">
+						</tr>
+						<!-- SNMP TRAP INTERVAL -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_STAT_snmpTrapInt"></td>
+							<td class="tabal_right width_25p " id="idsnmp_TrapInt"></td>
+							<td class="tabal_right width_35p "><select size="1" name="telnett" id="telnett"><option value="0">0</option><option value="5">5</option><option value="15">15</option><option value="30">30</option><option value="60">60</option><option value="120">120</option></select>seconds<br></td>
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fTrapTimeSet()" name="Submit" id="Submit2">
+						</tr>
+						<!-- SNMP SERVER IP -->
+						<tr>
+							<td class="tabal_left width_30p" BindText="V_STAT_snmpServerIP"></td>
+							<td class="tabal_right width_25p " id="idsnmp_ServerIP"></td>
+							<td class="tabal_right width_35p "> 
+							<input maxlength="3" size="3" name="telnetip1" id="telnetip1" >.
+							<input maxlength="3" size="3" name="telnetip2" id="telnetip2" >.
+							<input maxlength="3" size="3" name="telnetip3" id="telnetip3" >.
+							<input maxlength="3" size="3" name="telnetip4" id="telnetip4" >
+							</td>	
+							<td class="tabal_submit width_10p" align="center"><input type="button" value="Set" onclick="fServerIPSet()" name="Submit" id="Submit3">			
+					</tbody>
+				</table>
+
+				<table>
+					<tr>
+						<td height="5px"></td>
+					</tr>
+				</table>
+				
+			</form>
+
+		</div>
+
+	</body>
+</html>

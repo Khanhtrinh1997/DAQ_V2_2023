@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	 <title>Power System Monitor</title>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+		<link href="./css/common.css" rel="stylesheet" type="text/css">
+<!--  	<link href="./css/frame.css" rel="stylesheet" type="text/css -->
+		<link rel="stylesheet" href="login_files/style.css">
+		<script src="./js/jquery.min.js" type="text/javascript"></script>
+		<script src="js/util.js" type="text/javascript"></script>
+		<script src="js/frame.js" type="text/javascript"></script>
+		<script src="js/constant.js" type="text/javascript"></script>
+		<script type="text/javascript">
+				function movepage1() {
+					var vuser1 = document.getElementById('username').value;
+					var vpassword1 = document.getElementById('password').value;
+					if(vuser1 === "admin")
+					{
+						if(vpassword1 === "admin")
+						{
+						window.location = "Index.html";
+						}
+						else
+						{
+						alert('Username hoặc password không chính xác');
+						}
+					}
+					else
+					{
+					alert('Username hoặc password không chính xác');
+					}
+  				}			
+//return false;
+		</script>
+		
+		
+	</head>
+	<body onload="InitializingStatus=0;";>
+	    <div class="wrapper">
+	<div class="container">
+		<h1>Welcome </h1>
+		
+		<form class="form" name="pwd" action="" method="get">
+			<input type="text" name="username" id="username" placeholder="Username">
+			<input type="password" name="password" id="password" placeholder="Password">			
+			<button type="button" name="Submit" onclick = movepage1() value = "click">Login</button>
+		</form>
+	</div>
+	
+	<ul class="bg-bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	</div>
+
+	</body>
+</html>
